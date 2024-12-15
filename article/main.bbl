@@ -1,0 +1,33 @@
+\begin{thebibliography}{}
+
+\bibitem[Chen et~al. 2021]{Chen2021}
+Chen, I.~Y., Pierson, E., Rose, S., Joshi, S., Ferryman, K., and Ghassemi, M.
+  (2021).
+\newblock Ethical machine learning in healthcare.
+\newblock {\em Annual Review of Biomedical Data Science Annu. Rev. Biomed. Data
+  Sci}, 2021:123--144.
+
+\bibitem[Hardt et~al. 2021]{Hardt2021}
+Hardt, M., Chen, X., Cheng, X., Donini, M., Gelman, J., Gollaprolu, S., He, J.,
+  Larroy, P., Liu, X., McCarthy, N., Rathi, A., Rees, S., Siva, A., Tsai, E.,
+  Vasist, K., Yilmaz, P., Zafar, M.~B., Das, S., Haas, K., Hill, T., and
+  Kenthapadi, K. (2021).
+\newblock Amazon sagemaker clarify: Machine learning bias detection and
+  explainability in the cloud.
+\newblock {\em ArXiv}.
+
+\bibitem[Juhn et~al. 2022]{juhn2022assessing}
+Juhn, Y.~J., Ryu, E., Wi, C.-I., King, K.~S., Malik, M., Romero-Brufau, S.,
+  Weng, C., Sohn, S., Sharp, R.~R., and Halamka, J.~D. (2022).
+\newblock Assessing socioeconomic bias in machine learning algorithms in health
+  care: a case study of the houses index.
+\newblock {\em Journal of the American Medical Informatics Association},
+  29(7):1142--1151.
+
+\bibitem[Obermeyer et~al. 2019]{obermeyer2019dissecting}
+Obermeyer, Z., Powers, B., Vogeli, C., and Mullainathan, S. (2019).
+\newblock Dissecting racial bias in an algorithm used to manage the health of
+  populations.
+\newblock {\em Science}, 366(6464):447--453.
+
+\end{thebibliography}
