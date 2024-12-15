@@ -1,12 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from experiment_utils import (
-    evaluate_train_and_test_sets,
-    feature_importante,
-    generate_pies,
-    get_full_sets_graphs,
-    remove_instances,
-)
+from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
+                              generate_pies, get_full_sets_graphs,
+                              remove_instances)
 from IntersectionalBiasDataset import IntersectionalBiasDataset
 
 
