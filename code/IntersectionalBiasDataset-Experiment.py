@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from Datasets.IntersectionalBiasDataset import IntersectionalBiasDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_pies, get_full_sets_graphs,
                               remove_instances)
-from Datasets.IntersectionalBiasDataset import IntersectionalBiasDataset
 
 
 def gen_graph_for_sets(h: IntersectionalBiasDataset, name: str):
