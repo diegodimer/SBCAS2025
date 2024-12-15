@@ -3,7 +3,7 @@ import numpy as np
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_pies, get_full_sets_graphs,
                               remove_instances)
-from IntersectionalBiasDataset import IntersectionalBiasDataset
+from Datasets.IntersectionalBiasDataset import IntersectionalBiasDataset
 
 
 def gen_graph_for_sets(h: IntersectionalBiasDataset, name: str):

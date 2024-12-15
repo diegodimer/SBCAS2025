@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_pies, get_full_sets_graphs)
-from HeartDataset import HeartDataset
+from Datasets.HeartDataset import HeartDataset
 from matplotlib import gridspec
 
 
@@ -49,7 +49,7 @@ def generate_pie(h, name, full_dataset_test, model_dic, pie_name):
             loc="center left",
             bbox_to_anchor=(-0.7, 0, 0, 1),
         )
-    fig.savefig(f"{type(h).__name__}/{name}/{pie_name}.png")
+    fig.savefig(f"results/{type(h).__name__}/{name}/{pie_name}.png")
     plt.close("all")
 
 

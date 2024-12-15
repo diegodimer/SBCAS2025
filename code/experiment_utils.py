@@ -59,9 +59,9 @@ def feature_importante(name, h):
     logreg_importances[0].plot.bar(ax=ax, yerr=std)
     ax.set_title("Feature Importance LogisticRegression")
     plt.tight_layout()
-    Path(f"{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
     fig.savefig(
-        f"{type(h).__name__}/{name}/importances.png".replace(">", ""),
+        f"results/{type(h).__name__}/{name}/importances.png".replace(">", ""),
     )
     plt.close(fig)
 
@@ -95,8 +95,8 @@ def generate_model_bars(h, name, model_dic, bar_name):
                 va="bottom",
             )
 
-    Path(f"{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
+    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(f"results/{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
     plt.close(fig)
 
 
@@ -283,12 +283,12 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
                 ax=ax2,
                 protected_attr=attr,
             )
-        Path(f"{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+        Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
         fig_testsets[attr].savefig(
-            f"{type(h).__name__}/{name}/testSetsGrouped-{attr}.png".replace(">", "")
+            f"results/{type(h).__name__}/{name}/testSetsGrouped-{attr}.png".replace(">", "")
         )
         fig_trainsets[attr].savefig(
-            f"{type(h).__name__}/{name}/trainSetsGrouped-{attr}.png".replace(">", "")
+            f"results/{type(h).__name__}/{name}/trainSetsGrouped-{attr}.png".replace(">", "")
         )
 
 
@@ -369,8 +369,8 @@ def get_full_sets_graphs(h, name, stratify_age=False):
         plt.bar_label(
             bars, labels=[f"{x:,.2f}%" for x in bars.datavalues], label_type="center"
         )
-    Path(f"{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
+    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(f"results/{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
     plt.close(fig)
 
     # GENERATE GRAPHS FOR FULL TRAINING AND TEST DATA
