@@ -1,14 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from experiment_utils import (
-    evaluate_train_and_test_sets,
-    feature_importante,
-    generate_pies,
-    get_full_sets_graphs,
-)
-from matplotlib import gridspec
-
+from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
+                              generate_pies, get_full_sets_graphs)
 from HeartDataset import HeartDataset
+from matplotlib import gridspec
 
 
 def gen_graph_for_sets(h: HeartDataset, name: str):
