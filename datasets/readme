@@ -1,2 +1,4 @@
 heart.csv -> https://www.kaggle.com/datasets/nareshbhat/health-care-data-set-on-heart-attack-possibility?resource=download
 intersectional-bias.csv -> https://www.openml.org/search?type=data&status=active&id=44203&sort=runs
+diabetes_binary_health_indicators_BRFSS2015.csv -> https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset
+TCGA_GBM_LGG_Mutations_all.csv -> https://archive.ics.uci.edu/dataset/759/glioma+grading+clinical+and+mutation+features+dataset
