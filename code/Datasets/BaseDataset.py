@@ -4,7 +4,7 @@ from pathlib import Path
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas_profiling as pp
+from ydata_profiling import ProfileReport
 from PreTrainingBias.PreTrainingBias import PreTrainingBias
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
@@ -13,6 +13,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
+import itertools
 
 class BaseDataset:
     """
@@ -52,6 +53,7 @@ class BaseDataset:
         Attributes
         ----------
         dataset (pandas.DataFrame): The dataset in pandas dataframe format.
+        type_schema (dict): The schema for the dataset's PP report.
         predicted_attr (str): The column name of the predicted attribute.
         max_iter (int): Maximum number of iterations for LogisticRegression.
         n_estimators (int): Number of estimators for RandomForest.
@@ -78,10 +80,11 @@ class BaseDataset:
 
         """
         self.dataset = None # dataset in pandas dataframe format
+        self.type_schema = None # schema for the dataset's PP report
         self.predicted_attr = None # the column name of the predicted attribute
         self.max_iter = None # used for LogisticRegression
         self.n_estimators = None # used for RandomForest
-        self.random_state = None # used for all models and split
+        self.random_state = 42 # used for all models and split
         self.max_depth = None # used for DecisionTree and RandomForest
         self.criterion = None # used for DecisionTree and RandomForest
         self.positive_outcome = None # the positive outcome of the predicted attribute
@@ -120,7 +123,7 @@ class BaseDataset:
 
     def execute_models(self):
         self._gen_pp_report()
-        self._init_models(0)
+        self._init_models(self.random_state)
 
         for i in range(1, self.num_repetitions + 1):
             self._gen_train_test_sets(i)
@@ -164,7 +167,8 @@ class BaseDataset:
         my_file = Path(f"results/{type(self).__name__}/report.html")
         if not my_file.exists():
             Path(f"results/{type(self).__name__}").mkdir(parents=True, exist_ok=True)
-            pp.ProfileReport(self.dataset).to_file(f"results/{type(self).__name__}/report.html")
+            self.dataset.profile_report(type_schema=self.type_schema).to_file(f"results/{type(self).__name__}/report.html")
+            # ProfileReport(self.dataset).to_file(f"results/{type(self).__name__}/report.html")
 
     def _run_model(self, model):
         model_name = type(model).__name__
@@ -241,8 +245,7 @@ class BaseDataset:
         )
 
         for attr in protected_attr:
-            labels = dataset[attr].unique().tolist()
-            labels.sort()
+            labels =  list(self.protected_attr_mappings[attr].values())#dataset[attr].unique().tolist()
             outcomes = dataset[predicted_attr].unique().tolist()
             outcomes.sort()
             bar_ind = []
@@ -252,7 +255,7 @@ class BaseDataset:
                     bar_ind.append(
                         len(
                             dataset[
-                                (dataset[predicted_attr] == i) & (dataset[attr] == j)
+                                (dataset[predicted_attr] == i) & (dataset[attr].isin(j))
                             ]
                         )
                     )
@@ -270,15 +273,15 @@ class BaseDataset:
 
             for i, j in enumerate(bar_list):
                 if i == 0:
-                    ax.bar(labels, j, width, label=f"{i}")
+                    ax.bar(list(range(len(j))), j, width, label=f"{i}")
                     previous = np.array(j)
                 if i != 0:
-                    ax.bar(labels, j, width, label=f"{i}", bottom=previous)
+                    ax.bar(list(range(len(j))), j, width, label=f"{i}", bottom=previous)
                     previous += np.array(j)
 
             if labels_labels is not None:
                 x_ticks_labels = labels_labels
-                ax.set_xticks(labels)
+                ax.set_xticks(list(range(len(labels_labels))))
                 ax.set_xticklabels(x_ticks_labels)
 
             ax.legend(outcomes_labels) if outcomes_labels is not None else ax.legend(
@@ -291,6 +294,11 @@ class BaseDataset:
             ax.set_ylabel("count")
             for bars in ax.containers:  # if the bars should have the values
                 ax.bar_label(bars)
+            
+            path_dir = Path(f"results/{type(self).__name__}")
+            if not path_dir.exists():
+                path_dir.mkdir(parents=True, exist_ok=True)
+            
             if fig is not None:
                 fig.savefig(
                     f"results/{type(self).__name__}/{df_type}-{predicted_attr}-{attr}.png".replace(
@@ -319,3 +327,32 @@ class BaseDataset:
 
     def num_models(self):
         return len(self.models)
+
+    def gen_var_dist(self, protected_attr: str, predicted_attr: str, labels: list[str]=None, variation_name: str=""):
+        Positive = []
+        Negative = []
+        for i in sorted(self.dataset[protected_attr].unique()):
+            Positive.append(len(self.dataset[(self.dataset[protected_attr] == i) & (self.dataset[predicted_attr] == self.positive_outcome)]))
+            Negative.append(len(self.dataset[(self.dataset[protected_attr] == i) & (self.dataset[predicted_attr] == self.negative_outcome)]))
+        x = np.arange(len(labels))
+        width = 0.30  # the width of the bars
+
+        fig, ax = plt.subplots()
+
+        plt.xticks(rotation=90)
+        ax.bar(x - width/2, Positive, width, label='Positive')
+        ax.bar(x + width/2, Negative, width, label='Negative')
+
+        ax.set_ylabel('Values')
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        # rotate x label
+        ax.set_title(f"Dist. of {predicted_attr} by {protected_attr}")
+        ax.legend()
+        plt.tight_layout()
+
+        path_dir = Path(f"results/{type(self).__name__}/{variation_name}/")
+        if not path_dir.exists():
+            path_dir.mkdir(parents=True, exist_ok=True)
+
+        fig.savefig(f"results/{type(self).__name__}/{variation_name}/dist-{protected_attr}-{predicted_attr}")

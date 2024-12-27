@@ -24,12 +24,12 @@ class GliomaDataset(BaseDataset):
         self.num_repetitions = 10
         self.protected_attr_mappings = {
             "Gender": {
-                "Female": 0, 
-                "Male": 1
+                "Female": [0], 
+                "Male": [1]
                 },
             "Race": {
-                "White": 1, 
-                "Non-White": 0
+                "White": [1], 
+                "Non-White": [0]
                 }
         }
 

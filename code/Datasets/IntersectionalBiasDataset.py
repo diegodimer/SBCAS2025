@@ -60,8 +60,8 @@ class IntersectionalBiasDataset(BaseDataset):
         self.num_repetitions = 5
         self.num_repetitions = 6
         self.protected_attr_mappings = {
-            "Sex": {"Female": 0, "Male": 1},
-            "Race": {"Non-White": 0, "White": 1},
+            "Sex": {"Female": [0], "Male": [1]},
+            "Race": {"Non-White": [0], "White": [1]},
         }
 
     def custom_preprocessing(self, df):

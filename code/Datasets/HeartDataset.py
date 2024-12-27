@@ -57,7 +57,7 @@ class HeartDataset(BaseDataset):
         self.positive_outcome = 0
         self.protected_attr = ["sex"]
         self.num_repetitions = 10
-        self.protected_attr_mappings = {"sex": {"Female": 0, "Male": 1}}
+        self.protected_attr_mappings = {"sex": {"Female": [0], "Male": [1]}}
 
     def get_metrics(self, df_train):
         d = self.evaluate_metrics("sex", 1, "cp", df_train)

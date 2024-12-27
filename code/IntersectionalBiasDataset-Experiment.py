@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from Datasets.IntersectionalBiasDataset import IntersectionalBiasDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
-                              generate_pies, get_full_sets_graphs,
+                              generate_charts, get_full_sets_graphs,
                               remove_instances)
 
 
 def gen_graph_for_sets(h: IntersectionalBiasDataset, name: str):
     full_dataset_test = get_full_sets_graphs(h, name)
-    generate_pies(h, name, full_dataset_test)
+    generate_charts(h, name, full_dataset_test)
     evaluate_train_and_test_sets(h, name)
 
     # fig1, ax1 = plt.subplots()

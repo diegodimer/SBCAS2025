@@ -35,18 +35,22 @@ class PreTrainingBias:
             return self._class_imbalance(max(a, b), min(a, b))
 
     def class_imbalance_per_label(self, df, label, privileged_group) -> float:
+        if not isinstance(privileged_group, list):
+            privileged_group = [privileged_group]
         return self._class_imbalance(
-            (df[label].values == privileged_group).sum(),
-            (df[label].values != privileged_group).sum(),
+            df[label].isin(privileged_group).sum(),
+            (~df[label].isin(privileged_group)).sum(),
         )
 
     def kl_divergence(
         self, df, target, protected_attribute: str, privileged_group
     ) -> float:
+        if not isinstance(privileged_group, list):
+            privileged_group = [privileged_group]
         label = df[target]
         p_list = list()
-        sensitive_facet_index = df[protected_attribute] != privileged_group
-        unsensitive_facet_index = df[protected_attribute] == privileged_group
+        sensitive_facet_index = ~df[protected_attribute].isin(privileged_group)
+        unsensitive_facet_index = df[protected_attribute].isin(privileged_group)
         p_list = self.pdfs_aligned_nonzero(
             label[unsensitive_facet_index], label[sensitive_facet_index]
         )
@@ -56,10 +60,12 @@ class PreTrainingBias:
         return ks_val
 
     def ks(self, df, target, protected_attribute: str, privileged_group) -> float:
+        if not isinstance(privileged_group, list):
+            privileged_group = [privileged_group]
         label = df[target]
         p_list = list()
-        sensitive_facet_index = df[protected_attribute] != privileged_group
-        unsensitive_facet_index = df[protected_attribute] == privileged_group
+        sensitive_facet_index = ~df[protected_attribute].isin(privileged_group)
+        unsensitive_facet_index = df[protected_attribute].isin(privileged_group)
         p_list = self.pdfs_aligned_nonzero(
             label[unsensitive_facet_index], label[sensitive_facet_index]
         )
@@ -77,6 +83,8 @@ class PreTrainingBias:
         privileged_group,
         group_variable,
     ) -> float:
+        if not isinstance(privileged_group, list):
+            privileged_group = [privileged_group]
         unique_groups = np.unique(df[group_variable])
         cdd = np.array([])
         counts = np.array([])
@@ -87,7 +95,7 @@ class PreTrainingBias:
             num_a = len(
                 df[
                     (df[target] == positive_outcome)
-                    & (df[protected_attribute] != privileged_group)
+                    & (~df[protected_attribute].isin(privileged_group))
                     & (df[group_variable] == subgroup_variable)
                 ]
             )
@@ -101,7 +109,7 @@ class PreTrainingBias:
             num_d = len(
                 df[
                     (df[target] != positive_outcome)
-                    & (df[protected_attribute] != privileged_group)
+                    & (~df[protected_attribute].isin(privileged_group))
                     & (df[group_variable] == subgroup_variable)
                 ]
             )

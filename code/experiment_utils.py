@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from matplotlib import gridspec
+from matplotlib import colors, gridspec
 from matplotlib import pyplot as plt
 
 
@@ -81,13 +81,13 @@ def generate_model_bars(h, name, model_dic, bar_name):
         ax.set_ybound(0, 100)
         ax.set_ylabel("Count")
         ax.set_xlabel("Categories")
-        # rotate xlabel 45 degrees
-        plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+        ax.get_xaxis().set_visible(False)  # remove text from x axis
+        plt.legend(bars, labels)
 
-        for bar, percent in zip(bars, percents):
+        for bar, percent, val in zip(bars, percents, list(model_dic[model].values())):
             height = bar.get_height()
             ax.annotate(
-                f"{percent:.2f}%",
+                f"{percent:.2f}% ({val}) ",
                 xy=(bar.get_x() + bar.get_width() / 2, height),
                 xytext=(0, 3),
                 textcoords="offset points",
@@ -114,7 +114,7 @@ def remove_instances(x, conditions, value):
     return new_xtrain
 
 
-def generate_pies(h, name, full_dataset_test):
+def generate_charts(h, name, full_dataset_test):
     avg_acc = defaultdict(list)
     d = defaultdict(lambda: defaultdict(dict))
     d_wrongs = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
@@ -125,20 +125,18 @@ def generate_pies(h, name, full_dataset_test):
                 d[attr][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+               
                         )
                         & (
-                            full_dataset_test[model]
-                            == full_dataset_test[h.predicted_attr]
+                            full_dataset_test[model].isin(full_dataset_test[h.predicted_attr])
                         )
                     ]
                 )
                 d[attr][model][f"{val} false positive"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 0)
                         & (full_dataset_test[model] == 1)
@@ -147,8 +145,7 @@ def generate_pies(h, name, full_dataset_test):
                 d[attr][model][f"{val} false negative"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 1)
                         & (full_dataset_test[model] == 0)
@@ -157,8 +154,7 @@ def generate_pies(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (
                             full_dataset_test[h.predicted_attr]
@@ -169,8 +165,7 @@ def generate_pies(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} false negative"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 1)
                         & (full_dataset_test[model] == 0)
@@ -179,8 +174,7 @@ def generate_pies(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} false positive"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 0)
                         & (full_dataset_test[model] == 1)
@@ -189,8 +183,7 @@ def generate_pies(h, name, full_dataset_test):
                 d_correct[attr][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr]
-                            == h.protected_attr_mappings[attr][val]
+                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                         )
                         & (
                             full_dataset_test[model]
@@ -199,27 +192,27 @@ def generate_pies(h, name, full_dataset_test):
                     ]
                 )
                 avg_acc[val].append(
-                    (d_wrongs[attr][val][model][f"{val} predicted correctly"])
+                    (d_correct[attr][model][f"{val} predicted correctly"])
                     / (
                         len(
                             full_dataset_test.loc[
                                 (
-                                    full_dataset_test[attr]
-                                    == h.protected_attr_mappings[attr][val]
+                                    full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
                                 )
                             ]
                         )
                     )
                 )
     for attr in d.keys():
-        generate_model_bars(h, name, d[attr], f"piechart-complete-{attr}")
+        generate_model_bars(h, name, d[attr], f"barchart-complete-{attr}")
 
     for attr in d_wrongs.keys():
         for val in d_wrongs[attr].keys():
-            generate_model_bars(h, name, d_wrongs[attr][val], f"piechart-wrong-{val}")
+            generate_model_bars(h, name, d_wrongs[attr][val], f"barchart-{attr}-{val}")
 
     for attr in d_correct.keys():
-        generate_model_bars(h, name, d_correct[attr], f"piechart-correct-{attr}")
+        generate_model_bars(h, name, d_correct[attr], f"barchart-correct-{attr}")
+
     for key in avg_acc:
         print(
             f"\navg {key} acc: { round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)}"
@@ -251,15 +244,7 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
             for model in h.models:
                 y_hats = pd.DataFrame(h.predicted_list[model][i])
                 test_set[model] = y_hats.reset_index()[0]
-            # gs = gridspec.GridSpec(1, 2)
-            # fig = plt.figure(figsize=(12,5))
-            # ax = fig.add_subplot(gs[0])
-            # h.gen_graph(dataset=train_set, file_name=f"{name}/{i}-train", graph_title=f"Train set #{i}", labels_labels=["Female", "Male"], ax=ax)
-            # ax = fig.add_subplot(gs[1])
-            # h.gen_graph(dataset=test_set, file_name=f"{name}/{i}-test", graph_title=f"Test set #{i}", labels_labels=["Female", "Male"], ax=ax)
-            # f = h.get_metrics(train_set, print_metrics=False)
-            # for t in f.keys():
-            #     metrics_all[t].append(f[t])
+
             if stratify_age:
                 h.stratify_age(test_set)
                 h.stratify_age(train_set)

@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from Datasets.HeartDataset import HeartDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
-                              generate_pies, get_full_sets_graphs)
+                              generate_charts, get_full_sets_graphs)
 from matplotlib import gridspec
 
 
 def gen_graph_for_sets(h: HeartDataset, name: str):
     full_dataset_test = get_full_sets_graphs(h, name)
-    generate_pies(h, name, full_dataset_test)
+    generate_charts(h, name, full_dataset_test)
     evaluate_train_and_test_sets(h, name)
 
     plt.close("all")
@@ -16,41 +16,41 @@ def gen_graph_for_sets(h: HeartDataset, name: str):
     feature_importante(name, h)
 
 
-def generate_pie(h, name, full_dataset_test, model_dic, pie_name):
-    gs = gridspec.GridSpec(2, 2)
-    fig = plt.figure(figsize=(18, 10))
-    for idx, model in enumerate(h.models):
-        h.gen_graph(
-            "sex",
-            df_type=f"{name}/{model}",
-            dataset=full_dataset_test,
-            labels_labels=["Female", "Male"],
-            graph_title=f"{model}",
-            predicted_attr=model,
-        )
+# def generate_chart(h, name, full_dataset_test, model_dic, chart_name):
+#     gs = gridspec.GridSpec(2, 2)
+#     fig = plt.figure(figsize=(18, 10))
+#     for idx, model in enumerate(h.models):
+#         h.gen_graph(
+#             "sex",
+#             df_type=f"{name}/{model}",
+#             dataset=full_dataset_test,
+#             labels_labels=["Female", "Male"],
+#             graph_title=f"{model}",
+#             predicted_attr=model,
+#         )
 
-        ax = fig.add_subplot(gs[idx])
-        wedges, _ = ax.pie(list(model_dic[idx].values()), autopct=None)
-        ax.set_title(f"{model}")
-        percents = []
-        for i in list(model_dic[idx].values()):
-            percents.append(100.0 * i / sum(list(model_dic[idx].values())))
+#         ax = fig.add_subplot(gs[idx])
+#         wedges, _ = ax.pie(list(model_dic[idx].values()), autopct=None)
+#         ax.set_title(f"{model}")
+#         percents = []
+#         for i in list(model_dic[idx].values()):
+#             percents.append(100.0 * i / sum(list(model_dic[idx].values())))
 
-        labels = [
-            f"{i} - {j:1.2f}% ({k})"
-            for i, j, k in zip(
-                list(model_dic[idx].keys()), percents, list(model_dic[idx].values())
-            )
-        ]
-        ax.legend(
-            wedges,
-            labels,
-            title=f"{model}",
-            loc="center left",
-            bbox_to_anchor=(-0.7, 0, 0, 1),
-        )
-    fig.savefig(f"results/{type(h).__name__}/{name}/{pie_name}.png")
-    plt.close("all")
+#         labels = [
+#             f"{i} - {j:1.2f}% ({k})"
+#             for i, j, k in zip(
+#                 list(model_dic[idx].keys()), percents, list(model_dic[idx].values())
+#             )
+#         ]
+#         ax.legend(
+#             wedges,
+#             labels,
+#             title=f"{model}",
+#             loc="center left",
+#             bbox_to_anchor=(-0.7, 0, 0, 1),
+#         )
+#     fig.savefig(f"results/{type(h).__name__}/{name}/{chart_name}.png")
+#     plt.close("all")
 
 
 def remove_instances(x, target, value, sex=0):
@@ -205,7 +205,6 @@ def equal_balance():
     global all_f1s
     all_f1s += f1
     gen_graph_for_sets(h, "equal-balance")
-
 
 all_acs = []
 all_f1s = []
