@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.model_selection import train_test_split
 from Datasets.DiabetesDataset import DiabetesDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_charts, get_full_sets_graphs)
+from sklearn.model_selection import train_test_split
 
 
 def remove_instances_2(x, conditions: list, percentage: float):

@@ -1,10 +1,10 @@
+import itertools
 from collections import defaultdict
 from pathlib import Path
 
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
-from ydata_profiling import ProfileReport
 from PreTrainingBias.PreTrainingBias import PreTrainingBias
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
@@ -12,8 +12,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
+from ydata_profiling import ProfileReport
 
-import itertools
 
 class BaseDataset:
     """
