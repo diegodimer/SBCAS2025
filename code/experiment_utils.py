@@ -66,7 +66,7 @@ def feature_importante(name, h):
     plt.close(fig)
 
 
-def generate_model_bars(h, name, model_dic, bar_name):
+def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True):
     gs = gridspec.GridSpec(2, 2)
     fig = plt.figure(figsize=(18, 10))
     for idx, model in enumerate(h.models):
@@ -76,18 +76,18 @@ def generate_model_bars(h, name, model_dic, bar_name):
         values = list(data.values())
         percents = [100.0 * i / sum(values) for i in values]
 
-        bars = ax.bar(labels, percents, color=plt.cm.Paired(np.arange(len(values))))
+        bars = ax.bar(labels, percents if use_percentage_values else values, color=plt.cm.Paired(np.arange(len(values))))
         ax.set_title(f"{model}")
         ax.set_ybound(0, 100)
         ax.set_ylabel("Count")
         ax.set_xlabel("Categories")
         ax.get_xaxis().set_visible(False)  # remove text from x axis
-        plt.legend(bars, labels)
+        plt.legend(bars, labels, loc="best")
 
         for bar, percent, val in zip(bars, percents, list(model_dic[model].values())):
             height = bar.get_height()
             ax.annotate(
-                f"{percent:.2f}% ({val}) ",
+                f"{percent:.2f}% ({val})" if use_percentage_values else f"{val:.2f}%",
                 xy=(bar.get_x() + bar.get_width() / 2, height),
                 xytext=(0, 3),
                 textcoords="offset points",
@@ -119,6 +119,7 @@ def generate_charts(h, name, full_dataset_test):
     d = defaultdict(lambda: defaultdict(dict))
     d_wrongs = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
     d_correct = defaultdict(lambda: defaultdict(dict))
+    d_relative = defaultdict(lambda: defaultdict(dict))
     for attr in h.protected_attr_mappings.keys():
         for val in h.protected_attr_mappings[attr].keys():
             for model in h.models:
@@ -203,6 +204,14 @@ def generate_charts(h, name, full_dataset_test):
                         )
                     )
                 )
+                
+                d_relative[attr][model].update({
+                    f"{val} predicted correctly" : 100 * ((d[attr][model][f"{val} predicted correctly"]) / 
+                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"])),
+                    f"{val} predicted wrongly": 100 * ( (d[attr][model][f'{val} false positive'] + d[attr][model][f'{val} false negative']) / 
+                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"]))
+                })
+        
     for attr in d.keys():
         generate_model_bars(h, name, d[attr], f"barchart-complete-{attr}")
 
@@ -213,6 +222,9 @@ def generate_charts(h, name, full_dataset_test):
     for attr in d_correct.keys():
         generate_model_bars(h, name, d_correct[attr], f"barchart-correct-{attr}")
 
+    for attr in d_relative.keys():
+            generate_model_bars(h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
+            
     for key in avg_acc:
         print(
             f"\navg {key} acc: { round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)}"

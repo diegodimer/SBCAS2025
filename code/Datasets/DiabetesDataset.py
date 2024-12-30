@@ -84,19 +84,14 @@ class DiabetesDataset(BaseDataset):
         d = self.evaluate_metrics(
             "Sex", 1, "HighBP", df_train, print_metrics=print_metrics
         )
+        # d.update(
+        #     self.evaluate_metrics(
+        #         "Education", [2,3,4,5,6], "HighBP", df_train, print_metrics=print_metrics
+        #     )
+        # )
         d.update(
             self.evaluate_metrics(
                 "Age", [2,3,4,5,6,7,8,9,10,11,12,13], "HighBP", df_train, print_metrics=print_metrics
-            )
-        )
-        d.update(
-            self.evaluate_metrics(
-                "Education", [2,3,4,5,6], "HighBP", df_train, print_metrics=print_metrics
-            )
-        )
-        d.update(
-            self.evaluate_metrics(
-                "Income", [2,3,4,5,6,7,8], "HighBP", df_train, print_metrics=print_metrics
             )
         )
 
