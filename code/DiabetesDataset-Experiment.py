@@ -5,6 +5,7 @@ from Datasets.DiabetesDataset import DiabetesDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_charts, get_full_sets_graphs)
 
+
 def remove_instances_2(x, conditions: list, percentage: float):
     new_x = x.loc[np.logical_and.reduce(conditions)]
     new_x_size = len(new_x)
@@ -21,36 +22,6 @@ def gen_graph_for_sets(h: DiabetesDataset, name: str):
     plt.close("all")
 
     feature_importante(name, h)
-
-def high_imbalance():
-    def perturbe(X_train, y_train):
-        new_x_train = X_train.reset_index()
-        new_x_train[h.predicted_attr] = y_train.reset_index()[h.predicted_attr]
-        # remove 80% of females with positive outcome
-        new_x_train = remove_instances_2(new_x_train, [new_x_train['Sex'] == 0, new_x_train['Diabetes_binary'] == 0], 0.80)
-        new_x_train = remove_instances_2(new_x_train, [new_x_train['Sex'] == 0, new_x_train['Diabetes_binary'] == 1], 0.20)
-
-        new_x_train = remove_instances_2(new_x_train, [
-                                         new_x_train['HighBP'] == 1, new_x_train['Diabetes_binary'] == 0, new_x_train['Sex'] == 0], 0.80)
-        
-        new_y_train = new_x_train[h.predicted_attr]
-        new_x_train = new_x_train.drop(h.predicted_attr, axis=1)
-        new_x_train = new_x_train.drop('index', axis=1)
-
-        return new_x_train, new_y_train
-
-    print("==========High Imbalance==========")
-    print("Remove 90%/ of women with positive output and 30% with positive output, respectively")
-    h = DiabetesDataset()
-    h.dropper = True
-    h.perturbe = perturbe
-    acc, f1 = h.execute_models()
-    global all_acs
-    all_acs += acc
-    global all_f1s
-    all_f1s += f1
-
-    gen_graph_for_sets(h, "high-imbalance")
 
 def original_dataset():
     h = DiabetesDataset()

@@ -10,13 +10,13 @@ class GliomaDataset(BaseDataset):
             dataset
             if dataset is not None
             else self.custom_preprocessing(
-                pd.read_csv("datasets/TCGA_GBM_LGG_Mutations_all.csv")
+                pd.read_csv("datasets/TCGA_InfoWithGrade.csv").drop_duplicates()
             )
         )
         self.predicted_attr = "Grade"
         self.max_iter = 2000
         self.n_estimators = 20
-        self.random_state = 0
+        self.random_state = 42
         self.max_depth = 7
         self.criterion = "entropy"
         self.positive_outcome = 0
@@ -28,30 +28,33 @@ class GliomaDataset(BaseDataset):
                 "Male": [1]
                 },
             "Race": {
-                "White": [1], 
-                "Non-White": [0]
+                "Non-White": [0],
+                "White": [1] 
                 }
         }
 
     def custom_preprocessing(self, df):
-        def discretize_sex(x):
-            if x == "Female":
-                return 0
-            elif x == "Male":
-                return 1
-            else:
-                raise
-
         def discretize_race(x):
-            if x == "white":
+            if x == 0:
                 return 1
             else:
                 return 0
 
-        df["Sex"] = df["Sex"].apply(lambda x: discretize_sex(x))
         df["Race"] = df["Race"].apply(lambda x: discretize_race(x))
-
         return df
 
-    def get_metrics(self, df_train):
-        raise NotImplementedError("Method not implemented")
+    def get_metrics(self, df_train, print_metrics=True):
+        d = self.evaluate_metrics(
+            "Gender", 1, "Age_at_diagnosis", df_train, print_metrics=print_metrics
+        )
+        # d.update(
+        #     self.evaluate_metrics(
+        #         "Education", [2,3,4,5,6], "Age_at_diagnosis", df_train, print_metrics=print_metrics
+        #     )
+        # )
+        d.update(
+            self.evaluate_metrics(
+                "Race", 1, "Age_at_diagnosis", df_train, print_metrics=print_metrics
+            )
+        )
+        return d
