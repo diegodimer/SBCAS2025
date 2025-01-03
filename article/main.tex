@@ -48,17 +48,17 @@
 \end{abstract}
      
 \section{Introduction}
-Machine learning (ML) is increasingly used in various domains, including Health, where it assists in diagnosis, prognosis, and treatment \cite{Chen2021}. 
+Machine learning (ML) is increasingly used in various domains, including Health, which assists in diagnosis, prognosis, and treatment \cite{Chen2021}. 
 However, ML algorithms can potentially introduce biases, leading to unfair and potentially harmful outcomes \cite{obermeyer2019dissecting,juhn2022assessing}. 
 
-This work aims to measure the risk of bias in Health datasets using pre-training bias metrics and assesses their impact on the performance of supervised ML algorithms, correlating the bias metrics to the overall models' performance. 
+This work aims to measure the risk of bias in Health datasets using pre-training bias metrics. It assesses their impact on the performance of supervised ML algorithms, correlating the bias metrics to the overall models' performance. 
 We analyze four pre-training bias metrics \cite{Hardt2021}: Class Imbalance (CI), Kullback-Leibler (KL) Divergence, Kolmogorov-Smirnov (KS), and Conditional Demographic Disparity in Labels (CDDL).
 
 \subsection{Class Imbalance (CI)}
-CI measures the representation of different classes within a dataset. It ranges from -1 to 1, with values near zero indicating balanced representation. Positive values indicate overrepresentation of the advantaged group, while negative values indicate overrepresentation of the disadvantaged group.
+CI measures the representation of different classes within a dataset. It ranges from -1 to 1, with values near zero indicating a balanced representation. Positive values indicate overrepresentation of the advantaged group, while negative values indicate overrepresentation of the disadvantaged group.
 
 \subsection{Kullback-Leibler (KL) Divergence}
-KL Divergence measures the divergence between the label distributions of two facets. It ranges from 0 to $+\infty$, with values near zero indicating similar distributions and higher values indicating greater divergence.
+KL Divergence measures the divergence between the label distributions of two facets. It ranges from 0 to $+\infty$, with values near zero indicating similar distributions and higher values indicating more significant divergence.
 
 \subsection{Kolmogorov-Smirnov (KS)}
 KS measures the maximum divergence between labels in the distribution for different facets. It ranges from 0 to 1, with values near zero indicating evenly distributed labels and values near one indicating unbalanced labels.
@@ -67,32 +67,31 @@ KS measures the maximum divergence between labels in the distribution for differ
 CDDL measures the proportion of negative outcomes in a specific facet of a dataset. It ranges from -1 to 1, with positive values indicating demographic disparity favoring the advantaged group and negative values indicating disparity favoring the disadvantaged group.
 
 \section{Related Work}
-Many libraries and open-source tools have been developed to address machine learning fairness. 
-As an example, AIF 360 library \cite{Bellamy2018} provides different techniques to identify and mitigate bias, Studies have shown that word embedding algorithms may encode marginalized populations differently, perpetuating social bias. For example, \cite{Zhang2020} demonstrated that such models associated African Americans and Blacks with prison and Whites and Caucasians with hospital in a fill-in-the-blank style course of action. 
-Similarly, Fairness Measures \cite{Zehlike2017} provides different ways of classifying fairness, bias and discrimination for any \textit{csv} dataset.
-Additionally, FairLens \cite{fairlens} is a python library that automatically discover and measures bias in data, providing a report on the data quality.
+Many libraries and open-source tools have been developed to address machine learning fairness; for example, the AIF 360 library \cite{Bellamy2018} provides different techniques to identify and mitigate bias. Studies have shown that word embedding algorithms may encode marginalized populations differently, perpetuating social bias. For example, \cite{Zhang2020} demonstrated that such models associated African Americans and Blacks with prison and Whites and Caucasians with hospitals in a fill-in-the-blank style course of action. 
+Similarly, Fairness Measures \cite{Zehlike2017} provides different ways of classifying fairness, bias, and discrimination for any \textit{csv} dataset.
+Additionally, FairLens \cite{fairlens} is a Python library that automatically discovers and measures bias in data, providing a report on the data quality.
 
-AI models trained on health data can be biased due to protected attributes, such as ethnicity and race. 
+AI models trained on health data can be biased due to protected attributes like ethnicity and race. 
 Various studies have explored different approaches for evaluating and mitigating bias in these models. 
-\cite {Lopes} analyzed the COMPAS dataset on criminal recidivism, and found that the classifier was more prone to predict recidivism for Black people, favoring other demographics. 
+\cite {Lopes} analyzed the COMPAS dataset on criminal recidivism and found that the classifier was more prone to predict recidivism for Black people, favoring other demographics. 
 In \cite{Noseworthy2020}, the author recommended that AI tools report the model's performance for all the protected attributes.
 The study in \cite{Park2021} found that bias mitigation algorithms outperformed simply removing the protected attribute that might cause bias.
 \cite{Mandhala2022} used pre-training bias metrics to evaluate bias in models trained on three datasets, finding that mitigation strategies can improve model performance for the unprivileged classes. 
 
-While numerous work have focused on define and mitigate bias, we have identified a gap in works that assess the direct impact of pre-training bias on the performance of machine learning algorithms, specifically in the Health domain. In this work, we aim to fill this gap by analyzing the correlation between pre-training bias metrics and the performance of supervised ML algorithms. 
+While numerous works have focused on defining and mitigating bias, we have identified a gap in works that assess the direct impact of pre-training bias on the performance of machine learning algorithms, specifically in the Health domain. In this work, we aim to fill this gap by analyzing the correlation between pre-training bias metrics and the performance of supervised ML algorithms. 
 
 \section{Methodology}
 Our methodology involves the following steps:
 \begin{enumerate}
     \item Data Collection: We collected four datasets from different sources
-    \item Data Preprocessing: We preprocessed the datasets to remove missing values, and encode categorical variables
-    \item Increase/Decrease Bias: We artificially increased and decreased bias in the datasets, creating a highly unbalanced and an equally balanced versions
+    \item Data Preprocessing: We preprocessed the datasets to remove missing values and encode categorical variables
+    \item Increase/Decrease Bias: We artificially increased and decreased bias in the datasets, creating highly unbalanced and equally balanced versions
     \item Pre-training Metrics: We calculated the CI, KL Divergence, KS, and CDDL metrics for each dataset
     \item Train Models: We trained supervised ML algorithms on the datasets and evaluated their performance using accuracy, precision, recall, and F1-score
     \item Correlation Analysis: We analyzed the correlation between the pre-training bias metrics and the performance of the ML algorithms
 \end{enumerate}
 
-The datasets, along with their source and protected attributes, are shown in Table~\ref{tab:datasets}.
+The datasets and their source and protected attributes are shown in Table~\ref{tab:datasets}.
 
 
 \begin{table}[h]
