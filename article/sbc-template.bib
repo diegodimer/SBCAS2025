@@ -66,11 +66,12 @@
 }
 
 @article{Bellamy2018,
-  author = {Rachel K. E. Bellamy and Kuntal Dey and Michael Hind and Samuel C. Hoffman and Stephanie Houde and Kalapriya Kannan and Pranay Lohia and Jacquelyn Martino and Sameep Mehta and Aleksandra Mojsilovic and Seema Nagar and Karthikeyan Natesan Ramamurthy and John Richards and Diptikalyan Saha and Prasanna Sattigeri and Moninder Singh and Kush R. Varshney and Yunfeng Zhang},
-  month  = {10},
-  title  = {AI Fairness 360: An Extensible Toolkit for Detecting, Understanding, and Mitigating Unwanted Algorithmic Bias},
-  url    = {http://arxiv.org/abs/1810.01943},
-  year   = {2018}
+  author  = {Rachel K. E. Bellamy and Kuntal Dey and Michael Hind and Samuel C. Hoffman and Stephanie Houde and Kalapriya Kannan and Pranay Lohia and Jacquelyn Martino and Sameep Mehta and Aleksandra Mojsilovic and Seema Nagar and Karthikeyan Natesan Ramamurthy and John Richards and Diptikalyan Saha and Prasanna Sattigeri and Moninder Singh and Kush R. Varshney and Yunfeng Zhang},
+  month   = {10},
+  title   = {AI Fairness 360: An Extensible Toolkit for Detecting, Understanding, and Mitigating Unwanted Algorithmic Bias},
+  url     = {http://arxiv.org/abs/1810.01943},
+  year    = {2018},
+  journal = {arXiv}
 }
 
 @article{Bello2004,
@@ -125,6 +126,37 @@
   abstract  = {We address the problems of 1/ assessing the confidence of the standard point estimates, precision, recall and F-score, and 2/ comparing the results, in terms of precision, recall and F-score, obtained using two different methods. To do so, we use a probabilistic setting which allows us to obtain posterior distributions on these performance indicators, rather than point estimates. This framework is applied to the case where different methods are run on different datasets from the same source, as well as the standard situation where competing results are obtained on the same data.},
   isbn      = {978-3-540-31865-1}
 }
+@misc{fairlens,
+  author = {Synthesized.io},
+  title = {Fairlens: A toolkit for fair and interpretable machine learning},
+  year = {2023},
+  howpublished = {\url{https://github.com/synthesized-io/fairlens}},
+  note = {Accessed: 2024-10-12}
+}
+
+@misc{CDC_Diabetes_Health_Indicators,
+  author = {Alex Teboul},
+  title = {Diabetes Health Indicators Dataset},
+  year = {2023},
+  url = {https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset/data},
+  note = {Accessed: 2024-12-30}
+}
+@Article{Glioma_Grading_Clinical_Mutation_Features,
+AUTHOR = {Tasci, Erdal and Zhuge, Ying and Kaur, Harpreet and Camphausen, Kevin and Krauze, Andra Valentina},
+TITLE = {Hierarchical Voting-Based Feature Selection and Ensemble Learning Model Scheme for Glioma Grading with Clinical and Molecular Characteristics},
+JOURNAL = {International Journal of Molecular Sciences},
+VOLUME = {23},
+YEAR = {2022},
+NUMBER = {22},
+ARTICLE-NUMBER = {14155},
+URL = {https://www.mdpi.com/1422-0067/23/22/14155},
+PubMedID = {36430631},
+ISSN = {1422-0067},
+ABSTRACT = {Determining the aggressiveness of gliomas, termed grading, is a critical step toward treatment optimization to increase the survival rate and decrease treatment toxicity for patients. Streamlined grading using molecular information has the potential to facilitate decision making in the clinic and aid in treatment planning. In recent years, molecular markers have increasingly gained importance in the classification of tumors. In this study, we propose a novel hierarchical voting-based methodology for improving the performance results of the feature selection stage and machine learning models for glioma grading with clinical and molecular predictors. To identify the best scheme for the given soft-voting-based ensemble learning model selections, we utilized publicly available TCGA and CGGA datasets and employed four dimensionality reduction methods to carry out a voting-based ensemble feature selection and five supervised models, with a total of sixteen combination sets. We also compared our proposed feature selection method with the LASSO feature selection method in isolation. The computational results indicate that the proposed method achieves 87.606% and 79.668% accuracy rates on TCGA and CGGA datasets, respectively, outperforming the LASSO feature selection method.},
+DOI = {10.3390/ijms232214155}
+}
+
+
 @article{Fletcher2021,
   abstract  = {In Low- and Middle- Income Countries (LMICs), machine learning (ML) and artificial intelligence (AI) offer attractive solutions to address the shortage of health care resources and improve the capacity of the local health care infrastructure. However, AI and ML should also be used cautiously, due to potential issues of fairness and algorithmic bias that may arise if not applied properly. Furthermore, populations in LMICs can be particularly vulnerable to bias and fairness in AI algorithms, due to a lack of technical capacity, existing social bias against minority groups, and a lack of legal protections. In order to address the need for better guidance within the context of global health, we describe three basic criteria (Appropriateness, Fairness, and Bias) that can be used to help evaluate the use of machine learning and AI systems: 1) APPROPRIATENESS is the process of deciding how the algorithm should be used in the local context, and properly matching the machine learning model to the target population; 2) BIAS is a systematic tendency in a model to favor one demographic group vs another, which can be mitigated but can lead to unfairness; and 3) FAIRNESS involves examining the impact on various demographic groups and choosing one of several mathematical definitions of group fairness that will adequately satisfy the desired set of legal, cultural, and ethical requirements. Finally, we illustrate how these principles can be applied using a case study of machine learning applied to the diagnosis and screening of pulmonary disease in Pune, India. We hope that these methods and principles can help guide researchers and organizations working in global health who are considering the use of machine learning and artificial intelligence.},
   author    = {Richard Ribón Fletcher and Audace Nakeshimana and Olusubomi Olubeko},
@@ -156,7 +188,7 @@
   publisher = {American Medical Informatics Association}
 }
 @article{Hardt2021,
-  journal   = {ArXiv},
+  journal  = {ArXiv},
   abstract = {Understanding the predictions made by machine learning (ML) models and their potential biases remains a challenging and labor-intensive task that depends on the application, the dataset, and the specific model. We present Amazon SageMaker Clarify, an explainability feature for Amazon SageMaker that launched in December 2020, providing insights into data and ML models by identifying biases and explaining predictions. It is deeply integrated into Amazon SageMaker, a fully managed service that enables data scientists and developers to build, train, and deploy ML models at any scale. Clarify supports bias detection and feature importance computation across the ML lifecycle, during data preparation, model evaluation, and post-deployment monitoring. We outline the desiderata derived from customer input, the modular architecture, and the methodology for bias and explanation computations. Further, we describe the technical challenges encountered and the tradeoffs we had to make. For illustration, we discuss two customer use cases. We present our deployment results including qualitative customer feedback and a quantitative evaluation. Finally, we summarize lessons learned, and discuss best practices for the successful adoption of fairness and explanation tools in practice.},
   author   = {Michaela Hardt and Xiaoguang Chen and Xiaoyi Cheng and Michele Donini and Jason Gelman and Satish Gollaprolu and John He and Pedro Larroy and Xinyu Liu and Nick McCarthy and Ashish Rathi and Scott Rees and Ankit Siva and ErhYuan Tsai and Keerthan Vasist and Pinar Yilmaz and Muhammad Bilal Zafar and Sanjiv Das and Kevin Haas and Tyler Hill and Krishnaram Kenthapadi},
   doi      = {10.1145/3447548.3467177},
@@ -371,7 +403,7 @@
 }
 
 @article{Suresh2019,
-  journal   = {ArXiv},
+  journal  = {ArXiv},
   abstract = {As machine learning (ML) increasingly affects people and society, awareness of its potential unwanted consequences has also grown. To anticipate, prevent, and mitigate undesirable downstream consequences, it is critical that we understand when and how harm might be introduced throughout the ML life cycle. In this paper, we provide a framework that identifies seven distinct potential sources of downstream harm in machine learning, spanning data collection, development, and deployment. In doing so, we aim to facilitate more productive and precise communication around these issues, as well as more direct, application-grounded ways to mitigate them.},
   author   = {Harini Suresh and John V. Guttag},
   doi      = {10.1145/3465416.3483305},

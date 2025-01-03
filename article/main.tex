@@ -17,7 +17,8 @@
 \usepackage{sbc-template}
 
 \usepackage{graphicx,url}
-
+\usepackage{booktabs}
+\usepackage{multirow}
 %\usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}
 \usepackage{xspace}
@@ -44,11 +45,6 @@
 \maketitle
 
 \begin{abstract}
-  This meta-paper describes the style to be used in articles and short papers
-  for SBC conferences. For papers in English, you should add just an abstract
-  while for the papers in Portuguese, we also ask for an abstract in
-  Portuguese (``resumo''). In both cases, abstracts should not have more than
-  10 lines and must be in the first page of the paper.
 \end{abstract}
      
 \section{Introduction}
@@ -70,7 +66,50 @@ KS measures the maximum divergence between labels in the distribution for differ
 \subsection{Conditional Demographic Disparity in Labels (CDDL)}
 CDDL measures the proportion of negative outcomes in a specific facet of a dataset. It ranges from -1 to 1, with positive values indicating demographic disparity favoring the advantaged group and negative values indicating disparity favoring the disadvantaged group.
 
+\section{Related Work}
+Many libraries and open-source tools have been developed to address machine learning fairness. 
+As an example, AIF 360 library \cite{Bellamy2018} provides different techniques to identify and mitigate bias, Studies have shown that word embedding algorithms may encode marginalized populations differently, perpetuating social bias. For example, \cite{Zhang2020} demonstrated that such models associated African Americans and Blacks with prison and Whites and Caucasians with hospital in a fill-in-the-blank style course of action. 
+Similarly, Fairness Measures \cite{Zehlike2017} provides different ways of classifying fairness, bias and discrimination for any \textit{csv} dataset.
+Additionally, FairLens \cite{fairlens} is a python library that automatically discover and measures bias in data, providing a report on the data quality.
 
+AI models trained on health data can be biased due to protected attributes, such as ethnicity and race. 
+Various studies have explored different approaches for evaluating and mitigating bias in these models. 
+\cite {Lopes} analyzed the COMPAS dataset on criminal recidivism, and found that the classifier was more prone to predict recidivism for Black people, favoring other demographics. 
+In \cite{Noseworthy2020}, the author recommended that AI tools report the model's performance for all the protected attributes.
+The study in \cite{Park2021} found that bias mitigation algorithms outperformed simply removing the protected attribute that might cause bias.
+\cite{Mandhala2022} used pre-training bias metrics to evaluate bias in models trained on three datasets, finding that mitigation strategies can improve model performance for the unprivileged classes. 
+
+While numerous work have focused on define and mitigate bias, we have identified a gap in works that assess the direct impact of pre-training bias on the performance of machine learning algorithms, specifically in the Health domain. In this work, we aim to fill this gap by analyzing the correlation between pre-training bias metrics and the performance of supervised ML algorithms. 
+
+\section{Methodology}
+Our methodology involves the following steps:
+\begin{enumerate}
+    \item Data Collection: We collected four datasets from different sources
+    \item Data Preprocessing: We preprocessed the datasets to remove missing values, and encode categorical variables
+    \item Increase/Decrease Bias: We artificially increased and decreased bias in the datasets, creating a highly unbalanced and an equally balanced versions
+    \item Pre-training Metrics: We calculated the CI, KL Divergence, KS, and CDDL metrics for each dataset
+    \item Train Models: We trained supervised ML algorithms on the datasets and evaluated their performance using accuracy, precision, recall, and F1-score
+    \item Correlation Analysis: We analyzed the correlation between the pre-training bias metrics and the performance of the ML algorithms
+\end{enumerate}
+
+The datasets, along with their source and protected attributes, are shown in Table~\ref{tab:datasets}.
+
+
+\begin{table}[h]
+  \begin{tabular}{@{}lll@{}}
+  \toprule
+  Source                                           & Dataset Name              & Protected Attributes        \\ \midrule
+  \cite{UCI}                                       & HeartDataset              & Sex                         \\
+  \cite{INTERSECTIONAL}                            & IntersectionalBiasDataset & Sex, Race                   \\
+  \cite{CDC_Diabetes_Health_Indicators}            & DiabetesDataset           & Sex, Age, Education, Income \\ 
+  \cite{Glioma_Grading_Clinical_Mutation_Features} & GliomaDataset             & Gender, Race                \\ \bottomrule
+  \end{tabular}
+  \caption{Datasets used in this work}
+  \label{tab:datasets}
+\end{table}
+\section{Experiments and Results}
+
+\section{Conclusion}
 % \begin{figure}[ht]
 % \centering
 % \includegraphics[width=.5\textwidth]{fig1.jpg}

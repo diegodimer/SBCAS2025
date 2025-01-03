@@ -131,17 +131,17 @@ class BaseDataset:
                 acc, f1 = self._run_model(self.models[model_name])
                 self.accs[model_name].append(acc)
                 self.f1s[model_name].append(f1)
-        acc_return = []
-        f1_return = []
+        acc_return = {}
+        f1_return = {}
         for model_name in self.accs:
             acc = self.accs[model_name]
             f1 = self.f1s[model_name]
-            acc_mean = sum(acc) / len(acc)
-            f1_mean = sum(f1) / len(f1)
-            print("{: <30}{: >30.3f}".format(model_name + " acc", acc_mean))
-            print("{: <30}{: >30.3f}".format(model_name + " f1", f1_mean))
-            acc_return.append(acc_mean)
-            f1_return.append(f1_mean)
+            acc_mean = round(sum(acc) / len(acc), 3)
+            f1_mean = round(sum(f1) / len(f1), 3)
+            # print("{: <30}{: >30.3f}".format(model_name + " acc", acc_mean))
+            # print("{: <30}{: >30.3f}".format(model_name + " f1", f1_mean))
+            acc_return[model_name] = acc_mean
+            f1_return[model_name] = f1_mean
         return acc_return, f1_return
 
     def _gen_train_test_sets(self, random_state):

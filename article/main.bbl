@@ -1,5 +1,14 @@
 \begin{thebibliography}{}
 
+\bibitem[Bellamy et~al. 2018]{Bellamy2018}
+Bellamy, R. K.~E., Dey, K., Hind, M., Hoffman, S.~C., Houde, S., Kannan, K.,
+  Lohia, P., Martino, J., Mehta, S., Mojsilovic, A., Nagar, S., Ramamurthy,
+  K.~N., Richards, J., Saha, D., Sattigeri, P., Singh, M., Varshney, K.~R., and
+  Zhang, Y. (2018).
+\newblock Ai fairness 360: An extensible toolkit for detecting, understanding,
+  and mitigating unwanted algorithmic bias.
+\newblock {\em arXiv}.
+
 \bibitem[Chen et~al. 2021]{Chen2021}
 Chen, I.~Y., Pierson, E., Rose, S., Joshi, S., Ferryman, K., and Ghassemi, M.
   (2021).
@@ -24,10 +33,71 @@ Juhn, Y.~J., Ryu, E., Wi, C.-I., King, K.~S., Malik, M., Romero-Brufau, S.,
 \newblock {\em Journal of the American Medical Informatics Association},
   29(7):1142--1151.
 
+\bibitem[Júnior et~al. 2022]{Lopes}
+Júnior, R. L.~I., Silveira, L., de~Faria, V. C.~N., and Lorena, A.~C. (2022).
+\newblock Justiça nas previsões de modelos de aprendizado de máquina:um
+  estudo de caso com dados de reincidência criminal.
+
+\bibitem[Mandhala et~al. 2022]{Mandhala2022}
+Mandhala, V.~N., Bhattacharyya, D., Midhunchakkaravarthy, D., and Kim, H.~J.
+  (2022).
+\newblock Detecting and mitigating bias in data using machine learning with
+  pre-training metrics.
+\newblock {\em Ingenierie des Systemes d'Information}, 27:119--125.
+
+\bibitem[Maslej et~al. 2022]{INTERSECTIONAL}
+Maslej, M., Sikstrom, L., Reslan, D., and Wang, Y. (2022).
+\newblock Intersectional-bias-assessment.
+
+\bibitem[Newman et~al. 1998]{UCI}
+Newman, D., Hettich, S., Blake, C., and Merz, C. (1998).
+\newblock Uci repository of machine learning databases.
+
+\bibitem[Noseworthy et~al. 2020]{Noseworthy2020}
+Noseworthy, P.~A., Attia, Z.~I., Brewer, L. P.~C., Hayes, S.~N., Yao, X., Kapa,
+  S., Friedman, P.~A., and Lopez-Jimenez, F. (2020).
+\newblock Assessing and mitigating bias in medical artificial intelligence: The
+  effects of race and ethnicity on a deep learning model for ecg analysis.
+\newblock {\em Circulation: Arrhythmia and Electrophysiology}.
+
 \bibitem[Obermeyer et~al. 2019]{obermeyer2019dissecting}
 Obermeyer, Z., Powers, B., Vogeli, C., and Mullainathan, S. (2019).
 \newblock Dissecting racial bias in an algorithm used to manage the health of
   populations.
 \newblock {\em Science}, 366(6464):447--453.
+
+\bibitem[Park et~al. 2021]{Park2021}
+Park, Y., Hu, J., Singh, M., Sylla, I., Dankwa-Mullan, I., Koski, E., and Das,
+  A.~K. (2021).
+\newblock Comparison of methods to reduce bias from clinical prediction models
+  of postpartum depression.
+\newblock {\em JAMA Network Open}, 4.
+
+\bibitem[Synthesized.io 2023]{fairlens}
+Synthesized.io (2023).
+\newblock Fairlens: A toolkit for fair and interpretable machine learning.
+\newblock \url{https://github.com/synthesized-io/fairlens}.
+\newblock Accessed: 2024-10-12.
+
+\bibitem[Tasci et~al. 2022]{Glioma_Grading_Clinical_Mutation_Features}
+Tasci, E., Zhuge, Y., Kaur, H., Camphausen, K., and Krauze, A.~V. (2022).
+\newblock Hierarchical voting-based feature selection and ensemble learning
+  model scheme for glioma grading with clinical and molecular characteristics.
+\newblock {\em International Journal of Molecular Sciences}, 23(22).
+
+\bibitem[Teboul 2023]{CDC_Diabetes_Health_Indicators}
+Teboul, A. (2023).
+\newblock Diabetes health indicators dataset.
+\newblock Accessed: 2024-12-30.
+
+\bibitem[Zehlike et~al. 2017]{Zehlike2017}
+Zehlike, M., Castillo, C., Bonchi, F., Hajian, S., and Megahed, M. (2017).
+\newblock Fairness measures: Datasets and software for detecting algorithmic
+  discrimination.
+
+\bibitem[Zhang et~al. 2020]{Zhang2020}
+Zhang, H., Lu, A.~X., Abdalla, M., McDermott, M., and Ghassemi, M. (2020).
+\newblock Hurtful words.
+\newblock pages 110--120. Association for Computing Machinery, Inc.
 
 \end{thebibliography}

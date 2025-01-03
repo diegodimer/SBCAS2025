@@ -224,12 +224,14 @@ def generate_charts(h, name, full_dataset_test):
 
     for attr in d_relative.keys():
             generate_model_bars(h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
-            
+    
+    avg_acc_df = {}
     for key in avg_acc:
-        print(
-            f"\navg {key} acc: { round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)}"
-        )
-
+        avg_acc_df[key] = round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)
+    df = pd.DataFrame.from_dict(avg_acc_df, orient='index', columns=['Mean Accuracy'])
+    print(df)
+    with open(f"results/{type(h).__name__}/{name}/mean_accuracy.txt".replace(">", ""), "w") as f:
+        f.write(df.style.to_latex(caption='Mean accuracy for each protected attribute',  position='p'))
 
 def evaluate_train_and_test_sets(h, name, stratify_age=False):
     gs_test = {
@@ -326,7 +328,14 @@ def get_full_sets_graphs(h, name, stratify_age=False):
     print(
         f"\nMetrics calculated over the train datasets (concatenanted from all {h.num_repetitions} repetitions)"
     )
-    h.get_metrics(full_dataset_train)
+    d = h.get_metrics(full_dataset_train)
+    # make all values with 3 decimal places
+    d = {k: round(v, 3) for k, v in d.items()}
+    df = pd.DataFrame(d.items(), columns = ['Metric', 'Value'])
+
+    with open(f"results/{type(h).__name__}/{name}/metrics_train.txt".replace(">", ""), "w") as f:
+        f.write(df.style.hide(axis='index').to_latex( caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',  position='p'))
+
     if stratify_age:
         h.stratify_age(full_dataset_test)
 
