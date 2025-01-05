@@ -1,0 +1,68 @@
+==========Original Dataset===========
+
+Metrics calculated over the train datasets (concatenanted from all 6 repetitions)
+Class Imbalance (Sex)                                 -0.103
+KL Divergence (Sex)                                    0.077
+KS (Sex)                                               0.195
+CDDL (Sex, Rumination)                                -0.184
+Class Imbalance (Race)                                -0.268
+KL Divergence (Race)                                   0.018
+KS (Race)                                              0.096
+CDDL (Race, Rumination)                                0.079
+           Mean Accuracy
+Female            80.994
+Male              95.207
+Non-White         85.849
+White             90.090
+==========High Imbalance==========
+Remove 95% of instances of non-white with negative outputRemove 50% of non-white with positive outputRemove 80% of women with negative output and 95% of women with positive output
+Mean Train size: 1529.7
+
+Metrics calculated over the train datasets (concatenanted from all 6 repetitions)
+Class Imbalance (Sex)                                  0.755
+KL Divergence (Sex)                                    0.474
+KS (Sex)                                               0.459
+CDDL (Sex, Rumination)                                -0.207
+Class Imbalance (Race)                                 0.235
+KL Divergence (Race)                                   0.938
+KS (Race)                                              0.503
+CDDL (Race, Rumination)                                0.500
+           Mean Accuracy
+Female            71.423
+Male              93.594
+Non-White         77.317
+White             88.512
+==========Equally Balanced==========
+Mean Train size: 3114.4
+
+Metrics calculated over the train datasets (concatenanted from all 6 repetitions)
+Class Imbalance (Sex)                                  0.000
+KL Divergence (Sex)                                    0.000
+KS (Sex)                                               0.000
+CDDL (Sex, Rumination)                                 0.005
+Class Imbalance (Race)                                 0.000
+KL Divergence (Race)                                   0.000
+KS (Race)                                              0.000
+CDDL (Race, Rumination)                               -0.007
+           Mean Accuracy
+Female            79.932
+Male              94.317
+Non-White         83.927
+White             90.723
+
+LaTeX Table for Accuracy
++----+----------+----------------------+--------------------+------------------+-----------------+
+|    | Metric   | Training Algorithm   |   Original Dataset |   High Imbalance |   Equal Balance |
++====+==========+======================+====================+==================+=================+
+|  0 | Accuracy | Logistic Regression  |             89.053 |           84.917 |          88.508 |
++----+----------+----------------------+--------------------+------------------+-----------------+
+|  1 | Accuracy | Decision Tree        |             84.386 |           78.811 |          83.242 |
++----+----------+----------------------+--------------------+------------------+-----------------+
+|  2 | Accuracy | Random Forest        |             88.773 |           80.538 |          87.508 |
++----+----------+----------------------+--------------------+------------------+-----------------+
+|  3 | F1-Score | Logistic Regression  |             89.429 |           86.464 |          89.05  |
++----+----------+----------------------+--------------------+------------------+-----------------+
+|  4 | F1-Score | Decision Tree        |             84.803 |           80.535 |          84.049 |
++----+----------+----------------------+--------------------+------------------+-----------------+
+|  5 | F1-Score | Random Forest        |             89.214 |           83.421 |          88.342 |
++----+----------+----------------------+--------------------+------------------+-----------------+

@@ -64,7 +64,7 @@ def high_imbalance():
     print("==========High Imbalance==========")
     print(
         "Remove 85% of women with negative output and 85% of men with positive output, respectively\n"
-        "Remove 75% of people with age between 18 and 24 with positive output and 85% of people with age above 24 with negative output, respectively\n"
+        "Remove 55% of people with age between 18 and 24 with positive output and 45% of people with age above 24 with negative output, respectively\n"
         "Remove 20% of women with low blood pressure with negative output and 20% of men with high blood pressure with positive output, respectively\n"
     )
     h = DiabetesDataset()

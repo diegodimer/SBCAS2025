@@ -106,7 +106,9 @@ def high_imbalance():
 
     print("==========High Imbalance==========")
     print(
-        "Remove 90%/ of women with negative output and 30% with positive output, respectively"
+        "Removed 85% of women with thal=2 and negative output, 80% of women with thal=3 and negative output, "
+        "80% of women with cp=2 and negative output, 80% of women with cp=0 and negative output, "
+        "and 20% of instances with positive output"
     )
     h = HeartDataset()
     h.dropper = True

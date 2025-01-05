@@ -59,7 +59,9 @@ def high_imbalance():
 
     print("==========High Imbalance==========")
     print(
-        "Remove 95% of instances of non-white with negative output, 50% of non-white with positive output,  80% of women with negative output, 95% of women with positive output"
+        "Remove 95% of instances of non-white with negative output"
+        "Remove 50% of non-white with positive output"
+        "Remove 80% of women with negative output and 95% of women with positive output"
     )
     h = IntersectionalBiasDataset()
     h.dropper = True
