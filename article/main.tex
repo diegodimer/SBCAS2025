@@ -94,6 +94,97 @@ The datasets and their source and protected attributes are shown in Table~\ref{t
 \end{table}
 \section{Experiments and Results}
 
+
+\begin{table}[]
+  \centering
+  \begin{tabular}{@{}rrrrr@{}}
+  \toprule
+                                    & Attribute            & Class      & Value  & Mean Train Set Size       \\ \midrule
+  \multirow{4}{*}{Original Dataset} & \multirow{2}{*}{Sex} & Female     & 86.205 & \multirow{4}{*}{183579.0} \\
+                                    &                      & Male       & 83.719 &                           \\
+                                    & \multirow{2}{*}{Age} & Unprileged & 83.245 &                           \\
+                                    &                      & Privileged & 85.120 &                           \\ \midrule
+  \multirow{4}{*}{High Imbalance}   & \multirow{2}{*}{Sex} & Female     & 53.063 & \multirow{4}{*}{53216.9}  \\
+                                    &                      & Male       & 83.352 &                           \\
+                                    & \multirow{2}{*}{Age} & Unprileged & 70.975 &                           \\
+                                    &                      & Privileged & 66.299 &                           \\ \midrule
+  \multirow{4}{*}{Equal Balance}    & \multirow{2}{*}{Sex} & Female     & 84.570 & \multirow{4}{*}{1002.4}   \\
+                                    &                      & Male       & 82.276 &                           \\
+                                    & \multirow{2}{*}{Age} & Unprileged & 80.790 &                           \\
+                                    &                      & Privileged & 83.575 &                           \\ \bottomrule
+  \end{tabular}
+  \caption{Accuracy results on the protected attributes for the Diabetes dataset}
+  \label{tab:acc-diabetes}
+  \end{table}
+
+\begin{table}[]
+  \centering
+  \begin{tabular}{@{}rrrrr@{}}
+  \toprule
+                                    & Attribute               & Class     & Value  & Mean Train Set Size    \\ \midrule
+  \multirow{4}{*}{Original Dataset} & \multirow{2}{*}{Gender} & Female    & 86.022 & \multirow{4}{*}{670.0} \\
+                                    &                         & Male      & 85.659 &                        \\
+                                    & \multirow{2}{*}{Race}   & Non-White & 74.537 &                        \\
+                                    &                         & White     & 86.936 &                        \\ \midrule
+  \multirow{4}{*}{High Imbalance}   & \multirow{2}{*}{Gender} & Female    & 64.785 & \multirow{4}{*}{332.0} \\
+                                    &                         & Male      & 82.316 &                        \\
+                                    & \multirow{2}{*}{Race}   & Non-White & 66.204 &                        \\
+                                    &                         & White     & 72.504 &                        \\ \midrule
+  \multirow{4}{*}{Equal Balance}    & \multirow{2}{*}{Gender} & Female    & 82.258 & \multirow{4}{*}{93.4}  \\
+                                    &                         & Male      & 83.236 &                        \\
+                                    & \multirow{2}{*}{Race}   & Non-White & 67.824 &                        \\
+                                    &                         & White     & 84.049 &                        \\ \bottomrule
+  \end{tabular}
+  \caption{Accuracy results on the protected attributes for the Glioma dataset}
+  \label{tab:acc-glioma}
+\end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+  \centering
+  \begin{tabular}{@{}rrrrr@{}}
+  \toprule
+                                    & Attribute             & Class     & Value  & Mean Train Set Size     \\ \midrule
+  \multirow{4}{*}{Original Dataset} & \multirow{2}{*}{Sex}  & Female    & 80.994 & \multirow{4}{*}{5280.0} \\
+                                    &                       & Male      & 95.207 &                         \\
+                                    & \multirow{2}{*}{Race} & Non-White & 85.849 &                         \\
+                                    &                       & White     & 90.090 &                         \\ \midrule
+  \multirow{4}{*}{High Imbalance}   & \multirow{2}{*}{Sex}  & Female    & 71.423 & \multirow{4}{*}{1529.7} \\
+                                    &                       & Male      & 93.594 &                         \\
+                                    & \multirow{2}{*}{Race} & Non-White & 77.317 &                         \\
+                                    &                       & White     & 88.512 &                         \\ \midrule
+  \multirow{4}{*}{Equal Balance}    & \multirow{2}{*}{Sex}  & Female    & 79.932 & \multirow{4}{*}{3114.4} \\
+                                    &                       & Male      & 94.317 &                         \\
+                                    & \multirow{2}{*}{Race} & Non-White & 83.927 &                         \\
+                                    &                       & White     & 90.723 &                         \\ \bottomrule
+  \end{tabular}
+  \caption{Accuracy results on the protected attributes for the Intersectional Bias dataset}
+  \label{tab:acc-intersectional}
+\end{table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+  \centering
+  \begin{tabular}{@{}rrrrr@{}}
+  \toprule
+                                    & Attribute            & Class  & Value  & Mean Train Set Size    \\ \midrule
+  \multirow{2}{*}{Original Dataset} & \multirow{2}{*}{Sex} & Female & 86.486 & \multirow{2}{*}{241.0} \\
+                                    &                      & Male   & 79.608 &                        \\ \midrule
+  \multirow{2}{*}{High Imbalance}   & \multirow{2}{*}{Sex} & Female & 85.946 & \multirow{2}{*}{211.2} \\
+                                    &                      & Male   & 80.627 &                        \\ \midrule
+  \multirow{2}{*}{Equal Balance}    & \multirow{2}{*}{Sex} & Female & 87.748 & \multirow{2}{*}{155.0} \\
+                                    &                      & Male   & 73.490 &                        \\ \bottomrule
+  \end{tabular}
+  \caption{Accuracy results on the protected attributes for the Heartdataset}
+  \label{tab:acc-heart}
+\end{table}
+
+  
 \section{Conclusion}
 
 

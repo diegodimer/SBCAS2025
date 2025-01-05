@@ -40,7 +40,15 @@ def remove_instances_2(x, conditions, value):
 
 
 def original_dataset():
+    global train_size_hi
+    train_size_hi = 0
+    def perturbe(X_train, y_train):
+        global train_size_hi
+        train_size_hi += len(X_train)
+        return X_train, y_train
     h = HeartDataset()
+    h.perturbe = perturbe
+    h.dropper = True
     print("==========Original Dataset===========")
 
     acc, f1 = h.execute_models()
@@ -48,6 +56,7 @@ def original_dataset():
     global all_f1s
     all_acs['Original Dataset'] = acc
     all_f1s['Original Dataset'] = f1
+    print(f"Mean Train size: {train_size_hi/10}")
     gen_graph_for_sets(h, "original-dataset")
     return h.num_models()
 

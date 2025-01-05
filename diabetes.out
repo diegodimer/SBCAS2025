@@ -1,4 +1,5 @@
 ==========Original Dataset===========
+Mean Train size: 183579.0
 
 Metrics calculated over the train datasets (concatenanted from all 10 repetitions)
 Class Imbalance (Sex)                                 -0.122

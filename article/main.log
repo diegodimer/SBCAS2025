@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.12.14)  3 JAN 2025 20:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.12.14)  5 JAN 2025 13:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -222,23 +222,39 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 98.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 120.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 146.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 171.
+
 (./main.bbl
 Underfull \vbox (badness 1178) has occurred while \output is active []
 
- [2] [3]) [4] (./main.aux) ) 
+ [2] [3] [4]) [5] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 2858 strings out of 480154
- 46035 string characters out of 5893787
- 343148 words of memory out of 5000000
- 20780 multiletter control sequences out of 15000+600000
+ 2862 strings out of 480154
+ 46108 string characters out of 5893787
+ 356180 words of memory out of 5000000
+ 20784 multiletter control sequences out of 15000+600000
  487167 words of font info for 60 fonts, out of 8000000 for 9000
  61 hyphenation exceptions out of 8191
- 70i,9n,76p,618b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,10n,76p,618b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (4 pages, 107281 bytes).
+Output written on main.pdf (5 pages, 111278 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

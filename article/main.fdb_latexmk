@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex main"] 1735946051 "main.aux" "main.bbl" "main" 1735946052
+["bibtex main"] 1736095899 "main.aux" "main.bbl" "main" 1736095949
   "./sbc.bst" 1734206769 21863 e2f961827e28074ef5a2bc27ccb7b310 ""
-  "main.aux" 1735946052 2688 29fecf0d1300abbf8cdcd9bb5562c6d6 "pdflatex"
+  "main.aux" 1736095949 3522 9549d870ff49ae83203435120548dd82 "pdflatex"
   "sbc-template.bib" 1735942053 51317 b27f75469c9fa9113655078905cd8b3a ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1735946051 "/home/diego/git/SBCAS2025_Diego_PreTrainingBias/article/main.tex" "main.pdf" "main" 1735946052
+["pdflatex"] 1736095949 "/home/diego/git/SBCAS2025_Diego_PreTrainingBias/article/main.tex" "main.pdf" "main" 1736095949
   "/etc/texmf/web2c/texmf.cnf" 1734199775 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/diego/git/SBCAS2025_Diego_PreTrainingBias/article/main.tex" 1735942581 6711 07852fc9c8fa5eb180f8d9559fc99624 ""
+  "/home/diego/git/SBCAS2025_Diego_PreTrainingBias/article/main.tex" 1736095949 13020 9b1308755c69140ee64b8e1c2ffce2e4 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -79,9 +79,9 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1734200248 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1734204746 1436578 01df5920e1af46753b9181279dbbe011 ""
   "caption2.sty" 1734206769 15189 50845fba222dc25666abc3397b231fab ""
-  "main.aux" 1735946052 2688 29fecf0d1300abbf8cdcd9bb5562c6d6 "pdflatex"
-  "main.bbl" 1735946051 4554 f0f72947dbe0497481aff0cb3668f00a "bibtex main"
-  "main.tex" 1735942581 6711 07852fc9c8fa5eb180f8d9559fc99624 ""
+  "main.aux" 1736095949 3522 9549d870ff49ae83203435120548dd82 "pdflatex"
+  "main.bbl" 1736095899 4554 f0f72947dbe0497481aff0cb3668f00a "bibtex main"
+  "main.tex" 1736095949 13020 9b1308755c69140ee64b8e1c2ffce2e4 ""
   "sbc-template.sty" 1734206769 5280 0a277450ee6cfc82a68e4b0b0f92e15e ""
   (generated)
   "main.aux"
