@@ -67,8 +67,8 @@ def feature_importante(name, h):
 
 
 def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True):
-    gs = gridspec.GridSpec(2, 2)
-    fig = plt.figure(figsize=(18, 10))
+    gs = gridspec.GridSpec(1, 3)
+    fig = plt.figure(figsize=(20,5))
     for idx, model in enumerate(h.models):
         ax = fig.add_subplot(gs[idx])
         data = model_dic[model]
@@ -223,6 +223,10 @@ def generate_charts(h, name, full_dataset_test):
         generate_model_bars(h, name, d_correct[attr], f"barchart-correct-{attr}")
 
     for attr in d_relative.keys():
+            # order d_relative[attr] by value
+            for key in d_relative[attr].keys():
+                d_relative[attr][key] = dict(sorted(d_relative[attr][key].items(), key=lambda x:x[1], reverse=True))
+
             generate_model_bars(h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
     
     avg_acc_df = {}

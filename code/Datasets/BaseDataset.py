@@ -285,7 +285,8 @@ class BaseDataset:
                 ax.set_xticklabels(x_ticks_labels)
 
             ax.legend(outcomes_labels) if outcomes_labels is not None else ax.legend(
-                title=predicted_attr
+                title=predicted_attr,
+                loc='best'
             )
 
             if graph_title is not None:
@@ -348,7 +349,7 @@ class BaseDataset:
         ax.set_xticklabels(labels)
         # rotate x label
         ax.set_title(f"Dist. of {predicted_attr} by {protected_attr}")
-        ax.legend()
+        ax.legend(loc='best')
         plt.tight_layout()
 
         path_dir = Path(f"results/{type(self).__name__}/{variation_name}/")
