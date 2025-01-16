@@ -4,7 +4,7 @@ from sbcasdiego.PreTrainingBias import PreTrainingBias
 
 #  Heart Disease dataset extracted from https://www.kaggle.com/datasets/rishidamarla/heart-disease-prediction?resource=download
 
-df = pd.read_csv("code/PreTrainingBias/Heart_Disease_Prediction.csv")
+df = pd.read_csv("sbcasdiego/PreTrainingBias/Heart_Disease_Prediction.csv")
 pt = PreTrainingBias()
 df_only_male = df.loc[df["Sex"] == 1]
 df_only_female = df.loc[df["Sex"] == 0]
