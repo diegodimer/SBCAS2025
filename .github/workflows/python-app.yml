@@ -27,7 +27,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
-        pip install -r code/requirements.txt
+        pip install -r sbcasdiego/requirements.txt
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -39,8 +39,8 @@ jobs:
       # uses: isort/isort-action@24d8a7a51d33ca7f36c3f23598dafa33f7071326
       uses: isort/isort-action@v1.1.1
       with:
-        sortPaths: code/
-        requirement-files: code/requirements.txt
+        sortPaths: sbcasdiego/
+        requirement-files: sbcasdiego/requirements.txt
                 
     - name: Test with pytest
       run: |
