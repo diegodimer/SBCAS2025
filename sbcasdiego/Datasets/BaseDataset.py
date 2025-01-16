@@ -1,11 +1,11 @@
 import itertools
 from collections import defaultdict
 from pathlib import Path
-import shap
+
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
-from sbcasdiego.PreTrainingBias.PreTrainingBias import PreTrainingBias
+import shap
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -13,6 +13,8 @@ from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from ydata_profiling import ProfileReport
+
+from sbcasdiego.PreTrainingBias.PreTrainingBias import PreTrainingBias
 
 
 class BaseDataset:
