@@ -1,5 +1,5 @@
 import pandas as pd
-from Datasets.BaseDataset import BaseDataset
+from sbcasdiego.Datasets.BaseDataset import BaseDataset
 
 
 class DiabetesDataset(BaseDataset):

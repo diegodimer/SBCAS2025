@@ -1,11 +1,11 @@
 import itertools
 from collections import defaultdict
 from pathlib import Path
-
+import shap
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
-from PreTrainingBias.PreTrainingBias import PreTrainingBias
+from sbcasdiego.PreTrainingBias.PreTrainingBias import PreTrainingBias
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression

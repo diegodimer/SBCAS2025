@@ -336,8 +336,9 @@ def get_full_sets_graphs(h, name, stratify_age=False):
     # make all values with 3 decimal places
     d = {k: round(v, 3) for k, v in d.items()}
     df = pd.DataFrame(d.items(), columns = ['Metric', 'Value'])
-
-    with open(f"results/{type(h).__name__}/{name}/metrics_train.txt".replace(">", ""), "w") as f:
+    file_name = f"results/{type(h).__name__}/{name}/".replace(">", "")
+    Path(file_name).mkdir(exist_ok=True, parents=True)
+    with open(f"{file_name}metrics_train.txt", "w") as f:
         f.write(df.style.hide(axis='index').to_latex( caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',  position='p'))
 
     if stratify_age:
