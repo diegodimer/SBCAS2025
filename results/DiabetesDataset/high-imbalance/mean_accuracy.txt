@@ -1,0 +1,10 @@
+\begin{table}[p]
+\caption{Mean accuracy for each protected attribute}
+\begin{tabular}{lr}
+ & Mean Accuracy \\
+Female & 53.063000 \\
+Male & 83.352000 \\
+Unprileged & 70.975000 \\
+Privileged & 66.299000 \\
+\end{tabular}
+\end{table}

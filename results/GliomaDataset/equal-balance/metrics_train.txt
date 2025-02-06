@@ -1,0 +1,14 @@
+\begin{table}[p]
+\caption{Metrics calculated over the train datasets (from 10 repetitions)}
+\begin{tabular}{lr}
+Metric & Value \\
+Class Imbalance (Gender) & -0.197000 \\
+KL Divergence (Gender) & 0.028000 \\
+KS (Gender) & 0.118000 \\
+CDDL (Gender, Age_at_diagnosis) & 0.064000 \\
+Class Imbalance (Race) & -0.032000 \\
+KL Divergence (Race) & 0.000000 \\
+KS (Race) & 0.000000 \\
+CDDL (Race, Age_at_diagnosis) & 0.001000 \\
+\end{tabular}
+\end{table}
