@@ -16,7 +16,7 @@
 
 \title{Assessing pre-training bias in Health data and estimating its impact on machine learning algorithms}
 
-\author{Diego Dimer Rodrigues\inst{1}, Mariana R Mendoza\inst{1}}
+\author{Diego Dimer Rodrigues\inst{1}, Mariana Recamonde-Mendoza\inst{1}}
 
 
 \address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
@@ -81,6 +81,7 @@ The datasets and their source and protected attributes are available in Table~\r
 
 
 \begin{table}[h]
+\centering
   \begin{tabular}{@{}rrr@{}}
   \toprule
   Source                                           & Dataset Name              & Protected Attributes        \\ \midrule
@@ -95,6 +96,7 @@ The datasets and their source and protected attributes are available in Table~\r
 \section{Experiments and Results}
 
 \subsection{Heart Dataset}
+\label{sec:heart}
 The first dataset was the Heart dataset, a real-life scenario collected from patients, consisting of around 300 instances, used to predict heart disease. The performance for each dataset variation and the mean dataset size used for the training are in Table~\ref{tab:acc-heart}.
 
 For the \textbf{highly unbalanced} version of this dataset, we removed 85\% of women with thal equals 2 and negative output, 80\% of women with thal equals 3 and negative output, 80\% of women with cp equals 2 and negative output, 80\% of women with cp equals 0 and negative output, and 20\% of instances with positive output. These changes resulted in increasing the values for all metrics. However, CDDL was still above 0.4 for the two correlated variables. In the \textbf{equally balanced} version, we managed to get all metrics close to zero. The complete report of the metrics is in Table~\ref{tab:metrics-health}. 
@@ -152,6 +154,7 @@ CDDL (sex, thal)      & 0.108    & 0.275          & -0.123        \\ \bottomrule
 
 
 \subsection{Intersectional-bias Dataset}
+\label{sec:intersectional}
 The second dataset is an artificial dataset created to predict a diagnosis (of schizophrenia or depression). The dataset contained two protected attributes, sex (with "female" as the unprivileged class) and race (with "non-white" as the unprivileged class); the performance in the protected attribute is reported in Table~\ref{tab:acc-intersectional}. We do identify that the performance, especially in the Sex attribute, was affected in the highly unbalanced version, with "female" having close to 9\% less accuracy; however, this could also be caused by the number of instances in the train set size since the equally balanced that had better performance was more than 2 times larger, and the original was even larger. 
 
 To achieve the metrics' values reported in Table~\ref{tab:metrics-intersectional}, in the \textbf{high imbalance} version, we remove 95\% of instances of non-white with negative output, 50\% of non-white with positive output, 80\% of women with negative output, and 95\% of women with positive output. It is also noted that the metrics for the sex attribute did not get above 0.5; increasing them would lead to even less data in the training set, deviating from the metrics' analysis.
@@ -234,6 +237,7 @@ CDDL (Race, Rumination) & 0.079    & 0.500          & -0.007        \\ \bottomru
 
 
 \subsection{Glioma Dataset}
+\label{sec:glioma}
 The Glioma dataset contains information about 20 genes (mutated or not) for the classification of brain tumors that can be classified into LGG (Lower-Grade Glioma) or GBM (Glioblastoma Multiforme). This dataset also contains two protected attributes: Gender (with "female" being the unprivileged) and Race (with "non-white" being the unprivileged). To make the \textbf{highly unbalanced} version on this dataset, we removed 70\% of women with Grade 1, 75\% of men with Grade 0, 75\% of non-white people with Grade 0, and 55\% of white people with Grade 1, respectively. This dataset's complete metrics' values are in Table~\ref{tab:metrics-glioma}. 
 
 In this dataset, we observed a different pattern: the highly unbalanced version had the worst performance compared to the other two, with around three times more data than the equally balanced version, and the performance affected primarily females and non-white people, as reported in Table~\ref{tab:acc-glioma}. As we see in Figure~\ref{fig:relative-glioma}, especially in \ref{fig:high-relative-glioma}, we can infer that all models were prone to wrongly predict negative for women, which would result in misdiagnosing for specific groups. The importance of each variable for the particular models, as reported in Figure~\ref{fig:importances-glioma}, does not show the protected attributes as important features and shows \textit{Age\_at\_diagnosis} (which is correlated to the protected attributes) as important to the decision-making process in the decision trees.  
@@ -241,13 +245,13 @@ In this dataset, we observed a different pattern: the highly unbalanced version 
 \begin{figure}[ht] % talvez deixar só o gráfico do high imbalance?
     \centering
         \subfigure[Original]
-        {\includegraphics[width=.8\textwidth]{results/GliomaDataset/original-dataset/barchart-complete-Gender.png}
+        {\includegraphics[width=1\textwidth]{results/GliomaDataset/original-dataset/barchart-complete-Gender.png}
         \label{fig:original-relative-glioma}}  
         \subfigure[Highly unbalanced]
-        {\includegraphics[width=.8\textwidth]{results/GliomaDataset/high-imbalance/barchart-complete-Gender.png} \label{fig:high-relative-glioma}} 
+        {\includegraphics[width=1\textwidth]{results/GliomaDataset/high-imbalance/barchart-complete-Gender.png} \label{fig:high-relative-glioma}} 
             \hfil
         \subfigure[Equally balanced]
-        {\includegraphics[width=.8\textwidth]{results/GliomaDataset/equal-balance/barchart-complete-Gender.png} \label{fig:equal-relative-glioma}} 
+        {\includegraphics[width=1\textwidth]{results/GliomaDataset/equal-balance/barchart-complete-Gender.png} \label{fig:equal-relative-glioma}} 
         \caption{Prediction results for the feature Gender on the Glioma dataset.}
         \label{fig:relative-glioma}
 \end{figure}
@@ -294,18 +298,19 @@ CDDL (Race, Age\_at\_diagnosis)   & 0.021    & 0.054          & 0.001         \\
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.0\linewidth]{results/GliomaDataset/original-dataset/importances.png}
+    \includegraphics[width=0.8\linewidth]{results/GliomaDataset/original-dataset/importances.png}
     \caption{Feature Importance for the original version of the Glioma dataset}
     \label{fig:importances-glioma}
 \end{figure}
 
 
 \subsection{Diabetes Dataset}
+\label{sec:diabetes}
 The diabetes dataset contains 70,692 survey responses. The target variable Diabetes\_binary has 2 classes: 0 is for no diabetes, and 1 is for prediabetes or diabetes. This dataset has 21 features, and for the experiments, we considered Sex and Age for the analysis of pre-training bias. The accuracy results for the two protected attributes are in Table~\ref{tab:acc-diabetes}.
 
 In the \textbf{highly unbalanced} version of this dataset, we removed 85\% of women with negative output, 85\% of men with positive output, 55\% of people aged between 18 and 24 with positive output, 45\% of people with age above 24 with negative output, 20\% of women with low blood pressure with negative output and 20\% of men with high blood pressure with positive output, respectively. The report on the metrics' values is in Table~\ref{tab:metrics-diabetes}.
 
-In this dataset, we see that the high values from the metrics do translate to the performance on the unprivileged classes, especially for females, with an accuracy 30\% lower than the other variations, even with the highly imbalanced dataset containing 53 times more data than the equally balanced. In the age attribute, the opposite occurred; accuracy was lower in the privileged class (age above 24). Analyzing the importance of each feature for this dataset, as shown in Figure~\ref{fig:importances-diabetes}, we can see that protected attributes were not the most important features in the decision-making process, but its unbalance reflected directly in the performance for the unprivileged groups.
+In this dataset, we see that the high values from the metrics do translate to the performance on the unprivileged classes, especially for females, with an accuracy 30\% lower than the other variations, even with the highly imbalanced dataset containing 53 times more data than the equally balanced. In the age attribute, the opposite occurred; accuracy was lower in the privileged class (age above 24). Analyzing the importance of each feature for this dataset, as shown in Figure~\ref{fig:importances-diabetes}, we can see that protected attributes were not the most important features in the decision-making process, but the unbalance of these attributes reflected directly in the performance for the unprivileged groups.
 
 \begin{table}[ht]
 \centering
@@ -354,17 +359,26 @@ CDDL (Age, HighBP)    & -0.022   & -0.057         & -0.397        \\ \bottomrule
     \label{fig:importances-diabetes}
 \end{figure}
 
+\section{General Discussion}
+
+Based on the results from the four analyzed datasets, we can discuss the impact of pre-training metrics and their influence on model performance across the three different models we trained. Specifically, the findings presented in sections~\ref{sec:diabetes} and~\ref{sec:glioma} suggest that when our dataset increases without considering the implications for model fairness, we increase the risk of accumulating biased data that may result in decreased accuracy in our results, particularly affecting historically underrepresented groups. It's also important to note that the results are consistent across all three trained models, indicating that the bias impacted the models equally, regardless of the algorithm used. 
+
+Analysis of feature importance in the different dataset variations shows that for all datasets except the Heart Dataset (discussed in Section~\ref{sec:heart}), the highly unbalanced versions considered the protected features important to the model predictions (among the five more important features); this is especially true for the tree-based models (decision tree and random forest).
+
+The complete set of charts, tables, code, and instructions on reproducing the experiments presented in this work are available on github\footnote{https://github.com/diegodimer/SBCAS2025}.
+
 \section{Conclusion}
 
 In this work, we assessed the impact of pre-training bias on the performance of machine learning algorithms in health datasets. We analyzed four pre-training bias metrics: Class Imbalance (CI), Kullback-Leibler (KL) Divergence, Kolmogorov-Smirnov (KS), and Conditional Demographic Disparity in Labels (CDDL). Our experiments on four datasets demonstrated that high values of these metrics often correlate with decreased performance for unprivileged groups, especially in the last two datasets (Glioma and Diabetes) we observed that the train set size might not be associated with the performance, as the highly imbalanced dataset had more data than the equally balanced version and reported worse performance. We also note that the pre-training metrics had a more significant impact on the datasets with more data, and real-life scenarios seemed to incorporate more bias than artificial datasets (as seen in the IntersectionalBias dataset).
 
-We highlight the need to address bias before training models, as the pre-training metrics can give some insights into the quality of the models trained before spending any computational resources. 
-% Future work includes analyzing the importance of each feature for each algorithm and trying to find a correlation to the bias impact on the accuracy score, incorporating new performance metrics and strategies to mitigate the bias and their effects on the pre-training metrics.
+We highlight the need to address bias before training models, as the pre-training metrics can give some insights into the quality of the models trained before spending any computational resources.
+
+Future work includes the following: analyzing the complete set of features on the dataset to generalize bias investigation beyond the protected attributes; conducting sensibility analysis for the metrics values to better measure the risk of bias from a numeric perspective; incorporating model explainability techniques such as PCA and SHAP values to explain the classifiers biased predictions; incorporating new performance metrics and strategies to mitigate the bias and their effects on the pre-training metrics.
 
 
 
 \clearpage 
-\section{References}
+%\section{References}
 
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
