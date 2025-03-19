@@ -23,8 +23,8 @@ class IntersectionalBiasDataset(BaseDataset):
 
         Args:
         ----
-        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset. 
-                                          If None, the dataset is loaded and preprocessed 
+        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset.
+                                          If None, the dataset is loaded and preprocessed
                                           from 'datasets/intersectional-bias.csv'.
 
         Attributes:
@@ -65,45 +65,46 @@ class IntersectionalBiasDataset(BaseDataset):
             "Race": {"Non-White": [0], "White": [1]},
         }
 
+    def discretize_sex(self, x):
+        if x == "Female":
+            return 0
+        elif x == "Male":
+            return 1
+        else:
+            raise
+
+    def discretize_race(self, x):
+        if x == "White":
+            return 1
+        else:
+            return 0
+
+    def discretize_housing(self, x):
+        if x == "Stable":
+            return 0
+        elif x == "Unstable":
+            return 1
+        else:
+            raise
+
+    def discretize_delay(self, x):
+        if x == "No":
+            return 0
+        elif x == "Yes":
+            return 1
+        else:
+            raise
+
+    def discretize_rumination(self, x):
+        return round(x, 2)
+
     def custom_preprocessing(self, df):
-        def discretize_sex(x):
-            if x == "Female":
-                return 0
-            elif x == "Male":
-                return 1
-            else:
-                raise
-
-        def discretize_race(x):
-            if x == "White":
-                return 1
-            else:
-                return 0
-
-        def discretize_housing(x):
-            if x == "Stable":
-                return 0
-            elif x == "Unstable":
-                return 1
-            else:
-                raise
-
-        def discretize_delay(x):
-            if x == "No":
-                return 0
-            elif x == "Yes":
-                return 1
-            else:
-                raise
-
-        def discretize_rumination(x):
-            return round(x, 2)
-
-        df["Sex"] = df["Sex"].apply(lambda x: discretize_sex(x))
-        df["Race"] = df["Race"].apply(lambda x: discretize_race(x))
-        df["Housing"] = df["Housing"].apply(lambda x: discretize_housing(x))
-        df["Delay"] = df["Delay"].apply(lambda x: discretize_delay(x))
-        df["Rumination"] = df["Delay"].apply(lambda x: discretize_rumination(x))
+        df["Sex"] = df["Sex"].apply(lambda x: self.discretize_sex(x))
+        df["Race"] = df["Race"].apply(lambda x: self.discretize_race(x))
+        df["Housing"] = df["Housing"].apply(lambda x: self.discretize_housing(x))
+        df["Delay"] = df["Delay"].apply(lambda x: self.discretize_delay(x))
+        df["Rumination"] = df["Delay"].apply(
+            lambda x: self.discretize_rumination(x))
 
         return df
 

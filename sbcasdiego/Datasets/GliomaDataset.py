@@ -11,7 +11,8 @@ class GliomaDataset(BaseDataset):
             dataset
             if dataset is not None
             else self.custom_preprocessing(
-                pd.read_csv("datasets/TCGA_InfoWithGrade.csv").drop_duplicates()
+                pd.read_csv(
+                    "datasets/TCGA_InfoWithGrade.csv").drop_duplicates()
             )
         )
         self.predicted_attr = "Grade"
@@ -25,13 +26,13 @@ class GliomaDataset(BaseDataset):
         self.num_repetitions = 10
         self.protected_attr_mappings = {
             "Gender": {
-                "Female": [0], 
+                "Female": [0],
                 "Male": [1]
-                },
+            },
             "Race": {
                 "Non-White": [0],
-                "White": [1] 
-                }
+                "White": [1]
+            }
         }
 
     def custom_preprocessing(self, df):

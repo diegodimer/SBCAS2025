@@ -50,7 +50,8 @@ class PreTrainingBias:
         label = df[target]
         p_list = list()
         sensitive_facet_index = ~df[protected_attribute].isin(privileged_group)
-        unsensitive_facet_index = df[protected_attribute].isin(privileged_group)
+        unsensitive_facet_index = df[protected_attribute].isin(
+            privileged_group)
         p_list = self.pdfs_aligned_nonzero(
             label[unsensitive_facet_index], label[sensitive_facet_index]
         )
@@ -65,7 +66,8 @@ class PreTrainingBias:
         label = df[target]
         p_list = list()
         sensitive_facet_index = ~df[protected_attribute].isin(privileged_group)
-        unsensitive_facet_index = df[protected_attribute].isin(privileged_group)
+        unsensitive_facet_index = df[protected_attribute].isin(
+            privileged_group)
         p_list = self.pdfs_aligned_nonzero(
             label[unsensitive_facet_index], label[sensitive_facet_index]
         )
@@ -153,22 +155,22 @@ class PreTrainingBias:
         }
         return dic
 
-    # Code borrowed from https://github.com/aws/amazon-sagemaker-clarify/blob/53cb4172bea1efd673b6d48c3a006ce4ac1fd5a5/src/smclarify/util/__init__.py
+    # Code borrowed from
+    # https://github.com/aws/amazon-sagemaker-clarify/blob/53cb4172bea1efd673b6d48c3a006ce4ac1fd5a5/src/smclarify/util/__init__.py
     # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
 
     def pdf(self, xs) -> dict:
         """
         Probability distribution function.
-        
+
         :param xs: input sequence
         :return: sequence of tuples as (value, frequency)
         """
-        counts = seq(xs).map(lambda x: (x, 1)).reduce_by_key(lambda x, y: x + y)
+        counts = seq(xs).map(lambda x: (x, 1)).reduce_by_key(
+            lambda x, y: x + y)
         total = counts.map(lambda x: x[1]).sum()
         result_pdf = counts.map(lambda x: (x[0], x[1] / total)).sorted().list()
         return result_pdf
-
 
     def pdfs_aligned_nonzero(self, *args) -> list[np.ndarray]:
         """

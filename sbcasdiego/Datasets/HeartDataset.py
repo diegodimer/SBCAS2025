@@ -24,8 +24,8 @@ class HeartDataset(BaseDataset):
 
         Args:
         ----
-        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset. 
-                          If None, the dataset is loaded from 'datasets/heart.csv' 
+        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset.
+                          If None, the dataset is loaded from 'datasets/heart.csv'
                           and duplicates are dropped. Default is None.
 
         Attributes:
