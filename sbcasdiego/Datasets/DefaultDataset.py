@@ -32,33 +32,22 @@ class DefaultDataset(BaseDataset):
         self.num_repetitions = num_repetitions
         self.protected_attr_mappings = protected_attr_mappings
 
-    def get_metrics_for_all_columns(self, correlated_vars: list):
-        protected_attr_mappings = {}
-        for column in self.dataset.columns:
-            if self.dataset[column].nunique() == 2 and column != self.predicted_attr:
-                protected_attr_mappings[column] = {"Privileged": self.dataset[column].value_counts().idxmax(),
-                                                   "Unprivileged": self.dataset[column].value_counts().idxmin()
-                                                   }
-        self.protected_attr_mappings = protected_attr_mappings
-        self.protected_attr = list(protected_attr_mappings.keys())
-        metrics = {}
-        for i in self.protected_attr:
-            for j in correlated_vars:
-                metrics.update(self.evaluate_metrics(
-                    i, self.protected_attr_mappings["Privileged"], j, self.dataset, False, False))
-
-        return metrics
 
     def get_metrics_graph(self, metrics: dict, metric_name):
         # plot the values for metric_name in dictionary metrics
         pass
 
-    def get_metrics(self, correlated_vars: list, df_train: None):
+    def get_metrics(self, correlated_vars, df_train: None):
         if df_train is None:
             df_train = self.dataset
         d = {}
+        metrics_names = ['Class Imbalance', 'KS', 'KL Divergence', 'CDDL']
         for i in self.protected_attr:
-            for j in correlated_vars:
-                d.update(self.evaluate_metrics(
-                    i, 1, j, df_train, print_metrics=False))
+                metrics = self.evaluate_metrics_per_attr(
+                    i, 1, correlated_vars, df_train)
+                for metric in metrics_names:
+                    if metric not in d:
+                        d[metric] = {}
+                    d[metric][i] = metrics[metric][i]
+                
         return d

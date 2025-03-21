@@ -224,6 +224,24 @@ class BaseDataset:
                     print(f"{key: <30}{dic[key]: >30.3f}")
                 out_dic[key] = dic[key]
         return out_dic
+    
+    def evaluate_metrics_per_attr(
+        self,
+        protected_attribute,
+        privileged_group,
+        group_variable,
+        dataset=None,
+    ):
+        dataset = self.dataset if dataset is None else dataset
+
+        return self.ptb.global_evaluation_per_attr(
+            dataset,
+            self.predicted_attr,
+            self.positive_outcome,
+            protected_attribute,
+            privileged_group,
+            group_variable,
+        )
 
     def gen_graph(
         self,

@@ -1,3 +1,4 @@
+from collections import defaultdict
 import numpy as np
 import pandas as pd
 from functional import seq
@@ -153,6 +154,36 @@ class PreTrainingBias:
                 group_variable,
             ),
         }
+        return dic
+
+    def global_evaluation_per_attr(
+        self,
+        df: pd.DataFrame,
+        target: str,
+        positive_outcome,
+        protected_attribute,
+        privileged_group,
+        group_variable,
+    ):
+        dic = defaultdict(dict)
+        dic['Class Imbalance'][protected_attribute] = self.class_imbalance_per_label(
+                df, protected_attribute, privileged_group
+        )
+        dic['KL Divergence'][protected_attribute] = self.kl_divergence(
+                df, target, protected_attribute, privileged_group
+        )
+        dic['KS'][protected_attribute] = self.ks(
+                df, target, protected_attribute, privileged_group
+        )
+        dic['CDDL'][protected_attribute] = self.cddl(
+                df,
+                target,
+                positive_outcome,
+                protected_attribute,
+                privileged_group,
+                group_variable,
+        )
+
         return dic
 
     # Code borrowed from
