@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 from sbcasdiego.Datasets.BaseDataset import BaseDataset
 
 
@@ -33,9 +33,32 @@ class DefaultDataset(BaseDataset):
         self.protected_attr_mappings = protected_attr_mappings
 
 
-    def get_metrics_graph(self, metrics: dict, metric_name):
-        # plot the values for metric_name in dictionary metrics
-        pass
+    def get_metrics_graph(self, metrics: dict, plt, rotate_x_labels=False):
+        kl_divergence_keys = list(metrics['KL Divergence'].keys())
+
+        for value in kl_divergence_keys:
+            if np.isnan(metrics['KL Divergence'][value]):
+                metrics['KL Divergence'][value] = 0
+                metrics['KL Divergence'][f"{value}*"] = 0
+                del metrics['KL Divergence'][value]
+
+        if rotate_x_labels:
+            fig, axes = plt.subplots(2, 2, figsize=(30, 12))
+        else:
+            fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+        axes = axes.flatten()
+        for idx, (metric_name, metric_values) in enumerate(metrics.items()):         
+            ax = axes[idx]
+            sorted_metric_values = dict(sorted(metric_values.items(), key=lambda item: item[1]))
+            ax.bar(sorted_metric_values.keys(), sorted_metric_values.values())
+            ax.set_title(metric_name)
+            ax.set_ylabel(metric_name)
+            ax.set_xlabel("Class")
+            ax.axhline(y=0, color='k')
+            if rotate_x_labels:
+                ax.tick_params(axis='x', rotation=45)  # Rotate x-axis labels for better visibility
+
+        plt.tight_layout()  # Adjust layout to prevent overlap
 
     def get_metrics(self, correlated_vars, df_train: None):
         if df_train is None:
