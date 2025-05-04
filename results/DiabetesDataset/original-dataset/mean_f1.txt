@@ -1,0 +1,10 @@
+\begin{table}[p]
+\caption{Mean F1-Score for each protected attribute}
+\begin{tabular}{lr}
+ & Mean F1-Score \\
+Female & 0.181000 \\
+Male & 0.159000 \\
+Unprileged & 0.213000 \\
+Privileged & 0.167000 \\
+\end{tabular}
+\end{table}

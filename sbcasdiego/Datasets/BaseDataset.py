@@ -1,18 +1,15 @@
-import itertools
 from collections import defaultdict
 from pathlib import Path
 
 import graphviz
 import matplotlib.pyplot as plt
 import numpy as np
-import shap
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from ydata_profiling import ProfileReport
 
 from sbcasdiego.PreTrainingBias.PreTrainingBias import PreTrainingBias
 
@@ -39,7 +36,8 @@ class BaseDataset:
         Runs the given model and returns accuracy and F1 scores.
     evaluate_metrics(protected_attribute, privileged_group, group_variable, dataset=None, cddl_only=False, print_metrics=True):
         Evaluates and prints various metrics for the given protected attribute and group.
-    gen_graph(protected_attr=None, labels_labels=None, outcomes_labels=None, dataset=None, predicted_attr=None, file_name=None, df_type=None, graph_title=None, ax=None):
+    gen_graph(protected_attr=None, labels_labels=None, outcomes_labels=None,
+              dataset=None, predicted_attr=None, file_name=None, df_type=None, graph_title=None, ax=None):
         Generates and saves a graph based on the given parameters.
     save_tree():
         Saves a visualization of the decision tree model.
@@ -81,19 +79,20 @@ class BaseDataset:
         dropper (bool): Flag to indicate if the perturbe function should be called.
 
         """
-        self.dataset = None # dataset in pandas dataframe format
-        self.type_schema = None # schema for the dataset's PP report
-        self.predicted_attr = None # the column name of the predicted attribute
-        self.max_iter = None # used for LogisticRegression
-        self.n_estimators = None # used for RandomForest
-        self.random_state = 42 # used for all models and split
-        self.max_depth = None # used for DecisionTree and RandomForest
-        self.criterion = None # used for DecisionTree and RandomForest
-        self.positive_outcome = None # the positive outcome of the predicted attribute
-        self.negative_outcome = None # the negative outcome of the predicted attribute
-        self.num_repetitions = None # number of repetitions to run the models
-        self.protected_attr = None # list of protected attributes
-        self.protected_attr_mappings = None # dictionary of mappings for the protected attributes
+        self.dataset = None  # dataset in pandas dataframe format
+        self.type_schema = None  # schema for the dataset's PP report
+        self.predicted_attr = None  # the column name of the predicted attribute
+        self.max_iter = None  # used for LogisticRegression
+        self.n_estimators = None  # used for RandomForest
+        self.random_state = 42  # used for all models and split
+        self.max_depth = None  # used for DecisionTree and RandomForest
+        self.criterion = None  # used for DecisionTree and RandomForest
+        self.positive_outcome = None  # the positive outcome of the predicted attribute
+        self.negative_outcome = None  # the negative outcome of the predicted attribute
+        self.num_repetitions = None  # number of repetitions to run the models
+        self.protected_attr = None  # list of protected attributes
+        # dictionary of mappings for the protected attributes
+        self.protected_attr_mappings = None
 
         # variables to be used by this main class
         self.x_train_list = []
@@ -155,7 +154,8 @@ class BaseDataset:
         )
 
         if self.dropper:
-            self.X_train, self.y_train = self.perturbe(self.X_train, self.y_train)
+            self.X_train, self.y_train = self.perturbe(
+                self.X_train, self.y_train)
 
         self.x_train_list.append(self.X_train)
         self.x_test_list.append(self.X_test)
@@ -168,8 +168,10 @@ class BaseDataset:
     def _gen_pp_report(self):
         my_file = Path(f"results/{type(self).__name__}/report.html")
         if not my_file.exists():
-            Path(f"results/{type(self).__name__}").mkdir(parents=True, exist_ok=True)
-            self.dataset.profile_report(type_schema=self.type_schema).to_file(f"results/{type(self).__name__}/report.html")
+            Path(
+                f"results/{type(self).__name__}").mkdir(parents=True, exist_ok=True)
+            self.dataset.profile_report(type_schema=self.type_schema).to_file(
+                f"results/{type(self).__name__}/report.html")
             # ProfileReport(self.dataset).to_file(f"results/{type(self).__name__}/report.html")
 
     def _run_model(self, model):
@@ -197,7 +199,7 @@ class BaseDataset:
         group_variable,
         dataset=None,
         cddl_only=False,
-        print_metrics=True,
+        print_metrics=False,
     ):
         dataset = self.dataset if dataset is None else dataset
 
@@ -222,6 +224,24 @@ class BaseDataset:
                     print(f"{key: <30}{dic[key]: >30.3f}")
                 out_dic[key] = dic[key]
         return out_dic
+    
+    def evaluate_metrics_per_attr(
+        self,
+        protected_attribute,
+        privileged_group,
+        group_variable,
+        dataset=None,
+    ):
+        dataset = self.dataset if dataset is None else dataset
+
+        return self.ptb.global_evaluation_per_attr(
+            dataset,
+            self.predicted_attr,
+            self.positive_outcome,
+            protected_attribute,
+            privileged_group,
+            group_variable,
+        )
 
     def gen_graph(
         self,
@@ -247,7 +267,8 @@ class BaseDataset:
         )
 
         for attr in protected_attr:
-            labels =  list(self.protected_attr_mappings[attr].values())#dataset[attr].unique().tolist()
+            # dataset[attr].unique().tolist()
+            labels = list(self.protected_attr_mappings[attr].values())
             outcomes = dataset[predicted_attr].unique().tolist()
             outcomes.sort()
             bar_ind = []
@@ -257,7 +278,8 @@ class BaseDataset:
                     bar_ind.append(
                         len(
                             dataset[
-                                (dataset[predicted_attr] == i) & (dataset[attr].isin(j))
+                                (dataset[predicted_attr] == i) & (
+                                    dataset[attr].isin(j))
                             ]
                         )
                     )
@@ -278,7 +300,8 @@ class BaseDataset:
                     ax.bar(list(range(len(j))), j, width, label=f"{i}")
                     previous = np.array(j)
                 if i != 0:
-                    ax.bar(list(range(len(j))), j, width, label=f"{i}", bottom=previous)
+                    ax.bar(list(range(len(j))), j, width,
+                           label=f"{i}", bottom=previous)
                     previous += np.array(j)
 
             if labels_labels is not None:
@@ -297,11 +320,11 @@ class BaseDataset:
             ax.set_ylabel("count")
             for bars in ax.containers:  # if the bars should have the values
                 ax.bar_label(bars)
-            
+
             path_dir = Path(f"results/{type(self).__name__}")
             if not path_dir.exists():
                 path_dir.mkdir(parents=True, exist_ok=True)
-            
+
             if fig is not None:
                 fig.savefig(
                     f"results/{type(self).__name__}/{df_type}-{predicted_attr}-{attr}.png".replace(
@@ -331,12 +354,14 @@ class BaseDataset:
     def num_models(self):
         return len(self.models)
 
-    def gen_var_dist(self, protected_attr: str, predicted_attr: str, labels: list[str]=None, variation_name: str=""):
+    def gen_var_dist(self, protected_attr: str, predicted_attr: str, labels: list[str] = None, variation_name: str = ""):
         Positive = []
         Negative = []
         for i in sorted(self.dataset[protected_attr].unique()):
-            Positive.append(len(self.dataset[(self.dataset[protected_attr] == i) & (self.dataset[predicted_attr] == self.positive_outcome)]))
-            Negative.append(len(self.dataset[(self.dataset[protected_attr] == i) & (self.dataset[predicted_attr] == self.negative_outcome)]))
+            Positive.append(len(self.dataset[(self.dataset[protected_attr] == i) & (
+                self.dataset[predicted_attr] == self.positive_outcome)]))
+            Negative.append(len(self.dataset[(self.dataset[protected_attr] == i) & (
+                self.dataset[predicted_attr] == self.negative_outcome)]))
         x = np.arange(len(labels))
         width = 0.30  # the width of the bars
 
@@ -358,4 +383,5 @@ class BaseDataset:
         if not path_dir.exists():
             path_dir.mkdir(parents=True, exist_ok=True)
 
-        fig.savefig(f"results/{type(self).__name__}/{variation_name}/dist-{protected_attr}-{predicted_attr}")
+        fig.savefig(
+            f"results/{type(self).__name__}/{variation_name}/dist-{protected_attr}-{predicted_attr}")

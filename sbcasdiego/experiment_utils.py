@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from matplotlib import colors, gridspec
+from matplotlib import gridspec
 from matplotlib import pyplot as plt
 
 
@@ -59,7 +59,8 @@ def feature_importante(name, h):
     logreg_importances[0].plot.bar(ax=ax, yerr=std)
     ax.set_title("Feature Importance LogisticRegression")
     plt.tight_layout()
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
     fig.savefig(
         f"results/{type(h).__name__}/{name}/importances.png".replace(">", ""),
     )
@@ -68,7 +69,7 @@ def feature_importante(name, h):
 
 def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True):
     gs = gridspec.GridSpec(1, 3)
-    fig = plt.figure(figsize=(20,5))
+    fig = plt.figure(figsize=(20, 5))
     for idx, model in enumerate(h.models):
         ax = fig.add_subplot(gs[idx])
         data = model_dic[model]
@@ -76,7 +77,8 @@ def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True
         values = list(data.values())
         percents = [100.0 * i / sum(values) for i in values]
 
-        bars = ax.bar(labels, percents if use_percentage_values else values, color=plt.cm.Paired(np.arange(len(values))))
+        bars = ax.bar(labels, percents if use_percentage_values else values,
+                      color=plt.cm.Paired(np.arange(len(values))))
         ax.set_title(f"{model}")
         ax.set_ybound(0, 100)
         ax.set_ylabel("Count")
@@ -95,8 +97,10 @@ def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True
                 va="bottom",
             )
 
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"results/{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(
+        f"results/{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
     plt.close(fig)
 
 
@@ -116,126 +120,146 @@ def remove_instances(x, conditions, value):
 
 def generate_charts(h, name, full_dataset_test):
     avg_acc = defaultdict(list)
+    avg_f1 = defaultdict(list)
     d = defaultdict(lambda: defaultdict(dict))
     d_wrongs = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
     d_correct = defaultdict(lambda: defaultdict(dict))
     d_relative = defaultdict(lambda: defaultdict(dict))
+    d_f1 = defaultdict(lambda: defaultdict(dict))
     for attr in h.protected_attr_mappings.keys():
         for val in h.protected_attr_mappings[attr].keys():
             for model in h.models:
-                d[attr][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-               
-                        )
-                        & (
-                            full_dataset_test[model].isin(full_dataset_test[h.predicted_attr])
-                        )
-                    ]
-                )
-                d[attr][model][f"{val} false positive"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (full_dataset_test[h.predicted_attr] == 0)
-                        & (full_dataset_test[model] == 1)
-                    ]
-                )
-                d[attr][model][f"{val} false negative"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (full_dataset_test[h.predicted_attr] == 1)
-                        & (full_dataset_test[model] == 0)
-                    ]
-                )
-                d_wrongs[attr][val][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (
-                            full_dataset_test[h.predicted_attr]
-                            == full_dataset_test[model]
-                        )
-                    ]
-                )
-                d_wrongs[attr][val][model][f"{val} false negative"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (full_dataset_test[h.predicted_attr] == 1)
-                        & (full_dataset_test[model] == 0)
-                    ]
-                )
-                d_wrongs[attr][val][model][f"{val} false positive"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (full_dataset_test[h.predicted_attr] == 0)
-                        & (full_dataset_test[model] == 1)
-                    ]
-                )
-                d_correct[attr][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-                        )
-                        & (
-                            full_dataset_test[model]
-                            == full_dataset_test[h.predicted_attr]
-                        )
-                    ]
-                )
+                assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, d_f1, attr, val, model)
+
                 avg_acc[val].append(
                     (d_correct[attr][model][f"{val} predicted correctly"])
                     / (
                         len(
                             full_dataset_test.loc[
                                 (
-                                    full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                                    full_dataset_test[attr].isin(
+                                        h.protected_attr_mappings[attr][val])
                                 )
                             ]
                         )
                     )
                 )
                 
+                avg_f1[val].append(
+                    (d_f1[attr][model][f"{val} F1-Score"])
+                )
+                
                 d_relative[attr][model].update({
-                    f"{val} predicted correctly" : 100 * ((d[attr][model][f"{val} predicted correctly"]) / 
-                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"])),
-                    f"{val} predicted wrongly": 100 * ( (d[attr][model][f'{val} false positive'] + d[attr][model][f'{val} false negative']) / 
-                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"]))
+                    f"{val} predicted correctly": 100 * ((d[attr][model][f"{val} predicted correctly"]) /
+                                                         (d[attr][model][f"{val} predicted correctly"]
+                                                          + d[attr][model][f"{val} false positive"]
+                                                          + d[attr][model][f"{val} false negative"])),
+                    f"{val} predicted wrongly": 100 * ((d[attr][model][f'{val} false positive']
+                                                        + d[attr][model][f'{val} false negative']) /
+                                                       (d[attr][model][f"{val} predicted correctly"]
+                                                        + d[attr][model][f"{val} false positive"]
+                                                        + d[attr][model][f"{val} false negative"]))
                 })
-        
+
     for attr in d.keys():
         generate_model_bars(h, name, d[attr], f"barchart-complete-{attr}")
 
     for attr in d_wrongs.keys():
         for val in d_wrongs[attr].keys():
-            generate_model_bars(h, name, d_wrongs[attr][val], f"barchart-{attr}-{val}")
+            generate_model_bars(
+                h, name, d_wrongs[attr][val], f"barchart-{attr}-{val}")
 
     for attr in d_correct.keys():
-        generate_model_bars(h, name, d_correct[attr], f"barchart-correct-{attr}")
+        generate_model_bars(
+            h, name, d_correct[attr], f"barchart-correct-{attr}")
 
     for attr in d_relative.keys():
-            # order d_relative[attr] by value
-            for key in d_relative[attr].keys():
-                d_relative[attr][key] = dict(sorted(d_relative[attr][key].items(), key=lambda x:x[1], reverse=True))
+        # order d_relative[attr] by value
+        for key in d_relative[attr].keys():
+            d_relative[attr][key] = dict(
+                sorted(d_relative[attr][key].items(), key=lambda x: x[1], reverse=True))
 
-            generate_model_bars(h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
-    
+        generate_model_bars(
+            h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
+
     avg_acc_df = {}
+    avg_f1_df = {}
     for key in avg_acc:
-        avg_acc_df[key] = round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)
-    df = pd.DataFrame.from_dict(avg_acc_df, orient='index', columns=['Mean Accuracy'])
-    print(df)
+        avg_acc_df[key] = round(
+            ((sum(avg_acc[key])) / (len(avg_acc[key]))*100), 3)
+        avg_f1_df[key] = round(
+            (sum(avg_f1[key])) / (len(avg_f1[key])), 3
+        )
+    df_acc = pd.DataFrame.from_dict(
+        avg_acc_df, orient='index', columns=['Mean Accuracy'])
+    print(df_acc)
     with open(f"results/{type(h).__name__}/{name}/mean_accuracy.txt".replace(">", ""), "w") as f:
-        f.write(df.style.to_latex(caption='Mean accuracy for each protected attribute',  position='p'))
+        f.write(df_acc.style.to_latex(
+            caption='Mean accuracy for each protected attribute',  position='p'))
+        
+    df_f1 = pd.DataFrame.from_dict(
+        avg_f1_df, orient='index', columns=['Mean F1-Score'])
+    print(df_f1)
+    with open(f"results/{type(h).__name__}/{name}/mean_f1.txt".replace(">", ""), "w") as f:
+        f.write(df_f1.style.to_latex(
+            caption='Mean F1-Score for each protected attribute',  position='p'))
+        
+    return df_acc, df_f1
+
+
+def assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, d_f1, attr, val, model):
+    false_positive =  len(
+                    full_dataset_test.loc[
+                        (
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
+                        )
+                        & (full_dataset_test[h.predicted_attr] == 0)
+                        & (full_dataset_test[model] == 1)
+                    ]
+                )
+    false_negative =  len(
+                    full_dataset_test.loc[
+                        (
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
+                        )
+                        & (full_dataset_test[h.predicted_attr] == 1)
+                        & (full_dataset_test[model] == 0)
+                    ]
+                )
+    true_positive =  len(
+                    full_dataset_test.loc[
+                        (
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
+                        )
+                        & (full_dataset_test[h.predicted_attr] == 1)
+                        & (full_dataset_test[model] == 1)
+                    ]
+                )
+    true_negative =  len(
+                    full_dataset_test.loc[
+                        (
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
+                        )
+                        & (full_dataset_test[h.predicted_attr] == 0)
+                        & (full_dataset_test[model] == 0)
+                    ]
+                )
+    d[attr][model][f"{val} predicted correctly"] = true_positive + true_negative
+    d[attr][model][f"{val} false positive"] = false_positive
+    d[attr][model][f"{val} false negative"] = false_negative
+    d_wrongs[attr][val][model][f"{val} predicted correctly"] = true_positive + true_negative
+    d_wrongs[attr][val][model][f"{val} false negative"] = false_negative
+    d_wrongs[attr][val][model][f"{val} false positive"] = false_positive
+    d_correct[attr][model][f"{val} predicted correctly"] = true_positive + true_negative
+    
+    precision = true_positive / (true_positive + false_positive) if (true_positive + false_positive) > 0 else 0
+    recall = true_positive / (true_positive + false_negative) if (true_positive + false_negative) > 0 else 0
+    d_f1[attr][model][f"{val} F1-Score"] = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+
 
 def evaluate_train_and_test_sets(h, name, stratify_age=False):
     gs_test = {
@@ -246,8 +270,10 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
         attr: gridspec.GridSpec(round(h.num_repetitions / 2), 2)
         for attr in h.protected_attr
     }
-    fig_testsets = {attr: (plt.figure(figsize=(10, 20))) for attr in h.protected_attr}
-    fig_trainsets = {attr: (plt.figure(figsize=(10, 20))) for attr in h.protected_attr}
+    fig_testsets = {attr: (plt.figure(figsize=(10, 20)))
+                    for attr in h.protected_attr}
+    fig_trainsets = {attr: (plt.figure(figsize=(10, 20)))
+                     for attr in h.protected_attr}
 
     for attr in h.protected_attr:
         for i in range(h.num_repetitions):
@@ -286,7 +312,8 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
                 ax=ax2,
                 protected_attr=attr,
             )
-        Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+        Path(
+            f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
         fig_testsets[attr].savefig(
             f"results/{type(h).__name__}/{name}/testSetsGrouped-{attr}.png".replace(">", "")
         )
@@ -335,11 +362,12 @@ def get_full_sets_graphs(h, name, stratify_age=False):
     d = h.get_metrics(full_dataset_train)
     # make all values with 3 decimal places
     d = {k: round(v, 3) for k, v in d.items()}
-    df = pd.DataFrame(d.items(), columns = ['Metric', 'Value'])
+    df = pd.DataFrame(d.items(), columns=['Metric', 'Value'])
     file_name = f"results/{type(h).__name__}/{name}/".replace(">", "")
     Path(file_name).mkdir(exist_ok=True, parents=True)
     with open(f"{file_name}metrics_train.txt", "w") as f:
-        f.write(df.style.hide(axis='index').to_latex( caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',  position='p'))
+        f.write(df.style.hide(axis='index').to_latex(
+            caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',  position='p'))
 
     if stratify_age:
         h.stratify_age(full_dataset_test)
@@ -354,7 +382,8 @@ def get_full_sets_graphs(h, name, stratify_age=False):
             (
                 len(
                     full_dataset_test.loc[
-                        (full_dataset_test[p] == full_dataset_test[h.predicted_attr])
+                        (full_dataset_test[p] ==
+                         full_dataset_test[h.predicted_attr])
                     ]
                 )
                 / total_size
@@ -365,7 +394,8 @@ def get_full_sets_graphs(h, name, stratify_age=False):
             (
                 len(
                     full_dataset_test.loc[
-                        (full_dataset_test[p] != full_dataset_test[h.predicted_attr])
+                        (full_dataset_test[p] !=
+                         full_dataset_test[h.predicted_attr])
                     ]
                 )
                 / total_size
@@ -380,8 +410,10 @@ def get_full_sets_graphs(h, name, stratify_age=False):
         plt.bar_label(
             bars, labels=[f"{x:,.2f}%" for x in bars.datavalues], label_type="center"
         )
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"results/{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(
+        f"results/{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
     plt.close(fig)
 
     # GENERATE GRAPHS FOR FULL TRAINING AND TEST DATA

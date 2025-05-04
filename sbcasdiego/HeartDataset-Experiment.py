@@ -16,6 +16,7 @@ def gen_graph_for_sets(h: HeartDataset, name: str):
 
     feature_importante(name, h)
 
+
 def remove_instances(x, target, value, sex=0):
     new_x = x.loc[(x["sex"] == sex) & (x["target"] == target)]
     drop_indices = np.random.choice(
@@ -42,6 +43,7 @@ def remove_instances_2(x, conditions, value):
 def original_dataset():
     global train_size_hi
     train_size_hi = 0
+
     def perturbe(X_train, y_train):
         global train_size_hi
         train_size_hi += len(X_train)
@@ -64,6 +66,7 @@ def original_dataset():
 def high_imbalance():
     global train_size_hi
     train_size_hi = 0
+
     def perturbe(x_train, y_train):
         new_x_train = x_train.reset_index()
         new_x_train[h.predicted_attr] = y_train.reset_index()[h.predicted_attr]
@@ -134,9 +137,11 @@ def high_imbalance():
 def equal_balance():
     global train_size_eq
     train_size_eq = 0
+
     def perturbe(x_train, y_train):
         complete_x_train = x_train.reset_index()
-        complete_x_train[h.predicted_attr] = y_train.reset_index()[h.predicted_attr]
+        complete_x_train[h.predicted_attr] = y_train.reset_index()[
+            h.predicted_attr]
 
         positive_out_in_train = len(
             complete_x_train.loc[
@@ -187,6 +192,7 @@ def equal_balance():
     print(f"Mean Train size: {train_size_eq/10}")
     gen_graph_for_sets(h, "equal-balance")
 
+
 all_acs = {}
 all_f1s = {}
 n_models = original_dataset()
@@ -195,10 +201,10 @@ equal_balance()
 print("\nLaTeX Table for Accuracy")
 
 data = {
-    'Metric': ['Accuracy', 'Accuracy', 'Accuracy', 
+    'Metric': ['Accuracy', 'Accuracy', 'Accuracy',
                'F1-Score', 'F1-Score', 'F1-Score'],
     'Training Algorithm': ['Logistic Regression', 'Decision Tree', 'Random Forest',
-                            'Logistic Regression', 'Decision Tree', 'Random Forest'],
+                           'Logistic Regression', 'Decision Tree', 'Random Forest'],
     'Original Dataset': list(all_acs['Original Dataset'].values()) + list(all_f1s['Original Dataset'].values()),
     'High Imbalance': list(all_acs['High Imbalance'].values()) + list(all_f1s['High Imbalance'].values()),
     'Equal Balance': list(all_acs['Equal Balance'].values()) + list(all_f1s['Equal Balance'].values()),
@@ -208,7 +214,8 @@ df = pd.DataFrame(data)
 
 print(tabulate(df, headers='keys', tablefmt='grid'))
 df.set_index(list(data.keys()), inplace=True)
-latex_table = df.style.to_latex(caption='Performance results for the Heart Dataset',  position='p')
+latex_table = df.style.to_latex(
+    caption='Performance results for the Heart Dataset',  position='p')
 
 h = HeartDataset()
 with open(f"results/{type(h).__name__}/performance_results.tex", "w") as f:

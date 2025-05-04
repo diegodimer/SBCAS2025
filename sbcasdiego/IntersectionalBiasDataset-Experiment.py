@@ -21,6 +21,7 @@ def gen_graph_for_sets(h: IntersectionalBiasDataset, name: str):
 def original_dataset():
     global train_size_hi
     train_size_hi = 0
+
     def perturbe(X_train, y_train):
         global train_size_hi
         train_size_hi += len(X_train)
@@ -40,24 +41,30 @@ def original_dataset():
     gen_graph_for_sets(h, "original-dataset")
     return h.num_models()
 
+
 def high_imbalance():
     global train_size_hi
     train_size_hi = 0
+
     def perturbe(x_train, y_train):
         new_x_train = x_train.reset_index()
         new_x_train[h.predicted_attr] = y_train.reset_index()[h.predicted_attr]
 
         new_x_train = remove_instances(
-            new_x_train, [new_x_train["Race"] == 0, new_x_train["Diagnosis"] == 0], 0.95
+            new_x_train, [new_x_train["Race"] == 0,
+                          new_x_train["Diagnosis"] == 0], 0.95
         )
         new_x_train = remove_instances(
-            new_x_train, [new_x_train["Race"] == 0, new_x_train["Diagnosis"] == 1], 0.5
+            new_x_train, [new_x_train["Race"] == 0,
+                          new_x_train["Diagnosis"] == 1], 0.5
         )
         new_x_train = remove_instances(
-            new_x_train, [new_x_train["Sex"] == 0, new_x_train["Diagnosis"] == 0], 0.8
+            new_x_train, [new_x_train["Sex"] == 0,
+                          new_x_train["Diagnosis"] == 0], 0.8
         )
         new_x_train = remove_instances(
-            new_x_train, [new_x_train["Sex"] == 0, new_x_train["Diagnosis"] == 1], 0.95
+            new_x_train, [new_x_train["Sex"] == 0,
+                          new_x_train["Diagnosis"] == 1], 0.95
         )
 
         new_y_train = new_x_train[h.predicted_attr]
@@ -88,6 +95,7 @@ def high_imbalance():
 def equal_balance():
     global train_size_eq
     train_size_eq = 0
+
     def perturbe(x_train, y_train):
         new_x_train = x_train.reset_index()
         new_x_train[h.predicted_attr] = y_train.reset_index()[h.predicted_attr]
@@ -152,6 +160,7 @@ def equal_balance():
     print(f"Mean Train size: {train_size_eq/10}")
     gen_graph_for_sets(h, "equal-balance")
 
+
 all_acs = {}
 all_f1s = {}
 n_models = original_dataset()
@@ -160,10 +169,10 @@ equal_balance()
 print("\nLaTeX Table for Accuracy")
 
 data = {
-    'Metric': ['Accuracy', 'Accuracy', 'Accuracy', 
+    'Metric': ['Accuracy', 'Accuracy', 'Accuracy',
                'F1-Score', 'F1-Score', 'F1-Score'],
     'Training Algorithm': ['Logistic Regression', 'Decision Tree', 'Random Forest',
-                            'Logistic Regression', 'Decision Tree', 'Random Forest'],
+                           'Logistic Regression', 'Decision Tree', 'Random Forest'],
     'Original Dataset': list(all_acs['Original Dataset'].values()) + list(all_f1s['Original Dataset'].values()),
     'High Imbalance': list(all_acs['High Imbalance'].values()) + list(all_f1s['High Imbalance'].values()),
     'Equal Balance': list(all_acs['Equal Balance'].values()) + list(all_f1s['Equal Balance'].values()),
@@ -173,7 +182,8 @@ df = pd.DataFrame(data)
 
 print(tabulate(df, headers='keys', tablefmt='grid'))
 df.set_index(list(data.keys()), inplace=True)
-latex_table = df.style.to_latex(caption='Performance results for the Intersectional Bias Dataset',  position='p')
+latex_table = df.style.to_latex(
+    caption='Performance results for the Intersectional Bias Dataset',  position='p')
 
 h = IntersectionalBiasDataset()
 with open(f"results/{type(h).__name__}/performance_results.tex", "w") as f:
