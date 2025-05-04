@@ -120,14 +120,16 @@ def remove_instances(x, conditions, value):
 
 def generate_charts(h, name, full_dataset_test):
     avg_acc = defaultdict(list)
+    avg_f1 = defaultdict(list)
     d = defaultdict(lambda: defaultdict(dict))
     d_wrongs = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
     d_correct = defaultdict(lambda: defaultdict(dict))
     d_relative = defaultdict(lambda: defaultdict(dict))
+    d_f1 = defaultdict(lambda: defaultdict(dict))
     for attr in h.protected_attr_mappings.keys():
         for val in h.protected_attr_mappings[attr].keys():
             for model in h.models:
-                assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, attr, val, model)
+                assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, d_f1, attr, val, model)
 
                 avg_acc[val].append(
                     (d_correct[attr][model][f"{val} predicted correctly"])
@@ -142,7 +144,11 @@ def generate_charts(h, name, full_dataset_test):
                         )
                     )
                 )
-
+                
+                avg_f1[val].append(
+                    (d_f1[attr][model][f"{val} F1-Score"])
+                )
+                
                 d_relative[attr][model].update({
                     f"{val} predicted correctly": 100 * ((d[attr][model][f"{val} predicted correctly"]) /
                                                          (d[attr][model][f"{val} predicted correctly"]
@@ -177,31 +183,32 @@ def generate_charts(h, name, full_dataset_test):
             h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
 
     avg_acc_df = {}
+    avg_f1_df = {}
     for key in avg_acc:
         avg_acc_df[key] = round(
             ((sum(avg_acc[key])) / (len(avg_acc[key]))*100), 3)
-    df = pd.DataFrame.from_dict(
+        avg_f1_df[key] = round(
+            (sum(avg_f1[key])) / (len(avg_f1[key])), 3
+        )
+    df_acc = pd.DataFrame.from_dict(
         avg_acc_df, orient='index', columns=['Mean Accuracy'])
-    print(df)
+    print(df_acc)
     with open(f"results/{type(h).__name__}/{name}/mean_accuracy.txt".replace(">", ""), "w") as f:
-        f.write(df.style.to_latex(
+        f.write(df_acc.style.to_latex(
             caption='Mean accuracy for each protected attribute',  position='p'))
+        
+    df_f1 = pd.DataFrame.from_dict(
+        avg_f1_df, orient='index', columns=['Mean F1-Score'])
+    print(df_f1)
+    with open(f"results/{type(h).__name__}/{name}/mean_f1.txt".replace(">", ""), "w") as f:
+        f.write(df_f1.style.to_latex(
+            caption='Mean F1-Score for each protected attribute',  position='p'))
+        
+    return df_acc, df_f1
 
 
-def assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, attr, val, model):
-    d[attr][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(
-                                h.protected_attr_mappings[attr][val])
-                        )
-                        & (
-                            full_dataset_test[model].isin(
-                                full_dataset_test[h.predicted_attr])
-                        )
-                    ]
-                )
-    d[attr][model][f"{val} false positive"] = len(
+def assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, d_f1, attr, val, model):
+    false_positive =  len(
                     full_dataset_test.loc[
                         (
                             full_dataset_test[attr].isin(
@@ -211,7 +218,7 @@ def assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, att
                         & (full_dataset_test[model] == 1)
                     ]
                 )
-    d[attr][model][f"{val} false negative"] = len(
+    false_negative =  len(
                     full_dataset_test.loc[
                         (
                             full_dataset_test[attr].isin(
@@ -221,50 +228,37 @@ def assess_prediction_outcomes(h, full_dataset_test, d, d_wrongs, d_correct, att
                         & (full_dataset_test[model] == 0)
                     ]
                 )
-    d_wrongs[attr][val][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(
-                                h.protected_attr_mappings[attr][val])
-                        )
-                        & (
-                            full_dataset_test[h.predicted_attr]
-                            == full_dataset_test[model]
-                        )
-                    ]
-                )
-    d_wrongs[attr][val][model][f"{val} false negative"] = len(
+    true_positive =  len(
                     full_dataset_test.loc[
                         (
                             full_dataset_test[attr].isin(
                                 h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 1)
-                        & (full_dataset_test[model] == 0)
+                        & (full_dataset_test[model] == 1)
                     ]
                 )
-    d_wrongs[attr][val][model][f"{val} false positive"] = len(
+    true_negative =  len(
                     full_dataset_test.loc[
                         (
                             full_dataset_test[attr].isin(
                                 h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 0)
-                        & (full_dataset_test[model] == 1)
+                        & (full_dataset_test[model] == 0)
                     ]
                 )
-    d_correct[attr][model][f"{val} predicted correctly"] = len(
-                    full_dataset_test.loc[
-                        (
-                            full_dataset_test[attr].isin(
-                                h.protected_attr_mappings[attr][val])
-                        )
-                        & (
-                            full_dataset_test[model]
-                            == full_dataset_test[h.predicted_attr]
-                        )
-                    ]
-                )
+    d[attr][model][f"{val} predicted correctly"] = true_positive + true_negative
+    d[attr][model][f"{val} false positive"] = false_positive
+    d[attr][model][f"{val} false negative"] = false_negative
+    d_wrongs[attr][val][model][f"{val} predicted correctly"] = true_positive + true_negative
+    d_wrongs[attr][val][model][f"{val} false negative"] = false_negative
+    d_wrongs[attr][val][model][f"{val} false positive"] = false_positive
+    d_correct[attr][model][f"{val} predicted correctly"] = true_positive + true_negative
+    
+    precision = true_positive / (true_positive + false_positive) if (true_positive + false_positive) > 0 else 0
+    recall = true_positive / (true_positive + false_negative) if (true_positive + false_negative) > 0 else 0
+    d_f1[attr][model][f"{val} F1-Score"] = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
 
 
 def evaluate_train_and_test_sets(h, name, stratify_age=False):
