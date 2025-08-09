@@ -1,0 +1,7 @@
+{
+    "Target": {
+        "Dropout": 0,
+        "Enrolled": 1,
+        "Graduate": 2
+    }
+}
