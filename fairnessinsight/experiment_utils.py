@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from matplotlib import colors, gridspec
+from matplotlib import gridspec
 from matplotlib import pyplot as plt
 
 
@@ -49,9 +49,8 @@ def feature_importante(name, h):
     importances = np.mean(
         [pow(math.e, w.coef_[0]) for w in h.estimators["LogisticRegression"]], axis=0
     )  # pow(math.e, w)
-    std = np.std(
-        [pow(math.e, w.coef_[0]) for w in h.estimators["LogisticRegression"]], axis=0
-    )
+    std = np.std([pow(math.e, w.coef_[0])
+                  for w in h.estimators["LogisticRegression"]], axis=0)
     logreg_importances = pd.DataFrame(importances, index=feature_names)
     logreg_importances["std"] = std
     logreg_importances = logreg_importances.sort_values(by=0, ascending=False)
@@ -59,16 +58,18 @@ def feature_importante(name, h):
     logreg_importances[0].plot.bar(ax=ax, yerr=std)
     ax.set_title("Feature Importance LogisticRegression")
     plt.tight_layout()
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
     fig.savefig(
         f"results/{type(h).__name__}/{name}/importances.png".replace(">", ""),
     )
     plt.close(fig)
 
 
-def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True):
+def generate_model_bars(h, name, model_dic, bar_name,
+                        use_percentage_values=True):
     gs = gridspec.GridSpec(1, 3)
-    fig = plt.figure(figsize=(20,5))
+    fig = plt.figure(figsize=(20, 5))
     for idx, model in enumerate(h.models):
         ax = fig.add_subplot(gs[idx])
         data = model_dic[model]
@@ -76,7 +77,12 @@ def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True
         values = list(data.values())
         percents = [100.0 * i / sum(values) for i in values]
 
-        bars = ax.bar(labels, percents if use_percentage_values else values, color=plt.cm.Paired(np.arange(len(values))))
+        bars = ax.bar(
+            labels,
+            percents if use_percentage_values else values,
+            color=plt.cm.Paired(
+                np.arange(
+                    len(values))))
         ax.set_title(f"{model}")
         ax.set_ybound(0, 100)
         ax.set_ylabel("Count")
@@ -84,7 +90,9 @@ def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True
         ax.get_xaxis().set_visible(False)  # remove text from x axis
         plt.legend(bars, labels, loc="best")
 
-        for bar, percent, val in zip(bars, percents, list(model_dic[model].values())):
+        for bar, percent, val in zip(
+            bars, percents, list(
+                model_dic[model].values())):
             height = bar.get_height()
             ax.annotate(
                 f"{percent:.2f}% ({val})" if use_percentage_values else f"{val:.2f}%",
@@ -95,8 +103,10 @@ def generate_model_bars(h, name, model_dic, bar_name, use_percentage_values=True
                 va="bottom",
             )
 
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"results/{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(
+        f"results/{type(h).__name__}/{name}/{bar_name}.png".replace(">", ""))
     plt.close(fig)
 
 
@@ -127,7 +137,7 @@ def generate_charts(h, name, full_dataset_test):
                     full_dataset_test.loc[
                         (
                             full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
-               
+
                         )
                         & (
                             full_dataset_test[model].isin(full_dataset_test[h.predicted_attr])
@@ -204,38 +214,68 @@ def generate_charts(h, name, full_dataset_test):
                         )
                     )
                 )
-                
-                d_relative[attr][model].update({
-                    f"{val} predicted correctly" : 100 * ((d[attr][model][f"{val} predicted correctly"]) / 
-                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"])),
-                    f"{val} predicted wrongly": 100 * ( (d[attr][model][f'{val} false positive'] + d[attr][model][f'{val} false negative']) / 
-                                                        (d[attr][model][f"{val} predicted correctly"] + d[attr][model][f"{val} false positive"] + d[attr][model][f"{val} false negative"]))
-                })
-        
+
+                d_relative[attr][model].update({f"{val} predicted correctly": 100 *
+                                                ((d[attr][model][f"{val} predicted correctly"]) /
+                                                 (d[attr][model][f"{val} predicted correctly"] +
+                                                  d[attr][model][f"{val} false positive"] +
+                                                    d[attr][model][f"{val} false negative"])),
+                                                    f"{val} predicted wrongly": 100 *
+                                                ((d[attr][model][f'{val} false positive'] +
+                                                  d[attr][model][f'{val} false negative']) /
+                                                    (d[attr][model][f"{val} predicted correctly"] +
+                                                     d[attr][model][f"{val} false positive"] +
+                                                     d[attr][model][f"{val} false negative"]))})
+
     for attr in d.keys():
         generate_model_bars(h, name, d[attr], f"barchart-complete-{attr}")
 
     for attr in d_wrongs.keys():
         for val in d_wrongs[attr].keys():
-            generate_model_bars(h, name, d_wrongs[attr][val], f"barchart-{attr}-{val}")
+            generate_model_bars(
+                h,
+                name,
+                d_wrongs[attr][val],
+                f"barchart-{attr}-{val}")
 
     for attr in d_correct.keys():
-        generate_model_bars(h, name, d_correct[attr], f"barchart-correct-{attr}")
+        generate_model_bars(
+            h,
+            name,
+            d_correct[attr],
+            f"barchart-correct-{attr}")
 
     for attr in d_relative.keys():
-            # order d_relative[attr] by value
-            for key in d_relative[attr].keys():
-                d_relative[attr][key] = dict(sorted(d_relative[attr][key].items(), key=lambda x:x[1], reverse=True))
+        # order d_relative[attr] by value
+        for key in d_relative[attr].keys():
+            d_relative[attr][key] = dict(
+                sorted(
+                    d_relative[attr][key].items(),
+                    key=lambda x: x[1],
+                    reverse=True))
 
-            generate_model_bars(h, name, d_relative[attr], f"barchart-relative-{attr}", use_percentage_values=False)
-    
+        generate_model_bars(
+            h,
+            name,
+            d_relative[attr],
+            f"barchart-relative-{attr}",
+            use_percentage_values=False)
+
     avg_acc_df = {}
     for key in avg_acc:
-        avg_acc_df[key] = round(((sum(avg_acc[key]))/ (len(avg_acc[key]))*100 ),3)
-    df = pd.DataFrame.from_dict(avg_acc_df, orient='index', columns=['Mean Accuracy'])
+        avg_acc_df[key] = round(
+            ((sum(avg_acc[key])) / (len(avg_acc[key])) * 100), 3)
+    df = pd.DataFrame.from_dict(
+        avg_acc_df,
+        orient='index',
+        columns=['Mean Accuracy'])
     print(df)
     with open(f"results/{type(h).__name__}/{name}/mean_accuracy.txt".replace(">", ""), "w") as f:
-        f.write(df.style.to_latex(caption='Mean accuracy for each protected attribute',  position='p'))
+        f.write(
+            df.style.to_latex(
+                caption='Mean accuracy for each protected attribute',
+                position='p'))
+
 
 def evaluate_train_and_test_sets(h, name, stratify_age=False):
     gs_test = {
@@ -246,8 +286,10 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
         attr: gridspec.GridSpec(round(h.num_repetitions / 2), 2)
         for attr in h.protected_attr
     }
-    fig_testsets = {attr: (plt.figure(figsize=(10, 20))) for attr in h.protected_attr}
-    fig_trainsets = {attr: (plt.figure(figsize=(10, 20))) for attr in h.protected_attr}
+    fig_testsets = {attr: (plt.figure(figsize=(10, 20)))
+                    for attr in h.protected_attr}
+    fig_trainsets = {attr: (plt.figure(figsize=(10, 20)))
+                     for attr in h.protected_attr}
 
     for attr in h.protected_attr:
         for i in range(h.num_repetitions):
@@ -286,7 +328,8 @@ def evaluate_train_and_test_sets(h, name, stratify_age=False):
                 ax=ax2,
                 protected_attr=attr,
             )
-        Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+        Path(
+            f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
         fig_testsets[attr].savefig(
             f"results/{type(h).__name__}/{name}/testSetsGrouped-{attr}.png".replace(">", "")
         )
@@ -335,11 +378,15 @@ def get_full_sets_graphs(h, name, stratify_age=False):
     d = h.get_metrics(full_dataset_train)
     # make all values with 3 decimal places
     d = {k: round(v, 3) for k, v in d.items()}
-    df = pd.DataFrame(d.items(), columns = ['Metric', 'Value'])
+    df = pd.DataFrame(d.items(), columns=['Metric', 'Value'])
     file_name = f"results/{type(h).__name__}/{name}/".replace(">", "")
     Path(file_name).mkdir(exist_ok=True, parents=True)
     with open(f"{file_name}metrics_train.txt", "w") as f:
-        f.write(df.style.hide(axis='index').to_latex( caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',  position='p'))
+        f.write(
+            df.style.hide(
+                axis='index').to_latex(
+                caption=f'Metrics calculated over the train datasets (from {h.num_repetitions} repetitions)',
+                position='p'))
 
     if stratify_age:
         h.stratify_age(full_dataset_test)
@@ -378,10 +425,14 @@ def get_full_sets_graphs(h, name, stratify_age=False):
     ax.legend()
     for bars in ax.containers:  # if the bars should have the values
         plt.bar_label(
-            bars, labels=[f"{x:,.2f}%" for x in bars.datavalues], label_type="center"
-        )
-    Path(f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
-    fig.savefig(f"results/{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
+            bars,
+            labels=[
+                f"{x:,.2f}%" for x in bars.datavalues],
+            label_type="center")
+    Path(
+        f"results/{type(h).__name__}/{name}").mkdir(exist_ok=True, parents=True)
+    fig.savefig(
+        f"results/{type(h).__name__}/{name}/FullTest-Predictions.png".replace(">", ""))
     plt.close(fig)
 
     # GENERATE GRAPHS FOR FULL TRAINING AND TEST DATA

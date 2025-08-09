@@ -10,7 +10,7 @@ To extend to a new Dataset, one simply need to create a new file under `Datasets
 ## Installation
 To install the necessary dependencies, run:
 ```bash
-pip install -r sbcasdiego/requirements.txt
+pip install -r fairnessinsight/requirements.txt
 ```
 
 To build the PDF from the article, you need `pdflatex` and `bibtex`. The script `gen_pdf.sh` can be used to generate the pdf.

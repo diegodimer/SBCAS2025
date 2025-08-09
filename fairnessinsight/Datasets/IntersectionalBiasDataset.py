@@ -1,6 +1,6 @@
 import pandas as pd
 
-from sbcasdiego.Datasets.BaseDataset import BaseDataset
+from fairnessinsight.Datasets.BaseDataset import BaseDataset
 
 
 class IntersectionalBiasDataset(BaseDataset):
@@ -23,8 +23,8 @@ class IntersectionalBiasDataset(BaseDataset):
 
         Args:
         ----
-        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset. 
-                                          If None, the dataset is loaded and preprocessed 
+        dataset (pd.DataFrame, optional): A pandas DataFrame containing the dataset.
+                                          If None, the dataset is loaded and preprocessed
                                           from 'datasets/intersectional-bias.csv'.
 
         Attributes:
@@ -103,7 +103,8 @@ class IntersectionalBiasDataset(BaseDataset):
         df["Race"] = df["Race"].apply(lambda x: discretize_race(x))
         df["Housing"] = df["Housing"].apply(lambda x: discretize_housing(x))
         df["Delay"] = df["Delay"].apply(lambda x: discretize_delay(x))
-        df["Rumination"] = df["Delay"].apply(lambda x: discretize_rumination(x))
+        df["Rumination"] = df["Delay"].apply(
+            lambda x: discretize_rumination(x))
 
         return df
 

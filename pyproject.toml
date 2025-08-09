@@ -1,15 +1,16 @@
 [tool.poetry]
-name = "sbcasdiego"
+name = "fairnessinsight"
 version = "0.1.0"
 description = ""
 authors = ["Diego Dimer"]
 readme = "README.md"
-packages = [{ include = "sbcasdiego" }]
+packages = [{ include = "fairnessinsight" }]
 
-exclude = ["code/experiment_utils", 
-            "code/GliomaDataset-Experiment.py", 
-            "code/DiabetesDataset-Experiment.py", 
-            "code/HeartDataset-Experiment.py", "code/IntersectionalBiasDataset-Experiment.py", "code/requirements.txt"]
+exclude = ["fairnessinsight/experiment_utils",
+            "fairnessinsight/PreTrainingBias/test_PreTrainingBias.py",
+            "fairnessinsight/GliomaDataset-Experiment.py", 
+            "fairnessinsight/DiabetesDataset-Experiment.py", 
+            "fairnessinsight/HeartDataset-Experiment.py", "fairnessinsight/IntersectionalBiasDataset-Experiment.py", "fairnessinsight/requirements.txt"]
 
 [tool.poetry.dependencies]
 graphviz = "0.20.1"

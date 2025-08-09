@@ -1,6 +1,6 @@
 import pandas as pd
 
-from sbcasdiego.Datasets.BaseDataset import BaseDataset
+from fairnessinsight.Datasets.BaseDataset import BaseDataset
 
 
 class GliomaDataset(BaseDataset):
@@ -25,13 +25,13 @@ class GliomaDataset(BaseDataset):
         self.num_repetitions = 10
         self.protected_attr_mappings = {
             "Gender": {
-                "Female": [0], 
+                "Female": [0],
                 "Male": [1]
-                },
+            },
             "Race": {
                 "Non-White": [0],
-                "White": [1] 
-                }
+                "White": [1]
+            }
         }
 
     def custom_preprocessing(self, df):
@@ -46,8 +46,11 @@ class GliomaDataset(BaseDataset):
 
     def get_metrics(self, df_train, print_metrics=True):
         d = self.evaluate_metrics(
-            "Gender", 1, "Age_at_diagnosis", df_train, print_metrics=print_metrics
-        )
+            "Gender",
+            1,
+            "Age_at_diagnosis",
+            df_train,
+            print_metrics=print_metrics)
         # d.update(
         #     self.evaluate_metrics(
         #         "Education", [2,3,4,5,6], "Age_at_diagnosis", df_train, print_metrics=print_metrics
@@ -55,7 +58,9 @@ class GliomaDataset(BaseDataset):
         # )
         d.update(
             self.evaluate_metrics(
-                "Race", 1, "Age_at_diagnosis", df_train, print_metrics=print_metrics
-            )
-        )
+                "Race",
+                1,
+                "Age_at_diagnosis",
+                df_train,
+                print_metrics=print_metrics))
         return d
