@@ -15,6 +15,7 @@ from sklearn.tree import DecisionTreeClassifier
 from ydata_profiling import ProfileReport
 
 from fairnessinsight.PreTrainingBias.PreTrainingBias import PreTrainingBias
+from fairnessinsight.PostTrainingBias.PostTrainingBias import PostTrainingBias 
 
 
 class BaseDataset:
@@ -55,6 +56,7 @@ class BaseDataset:
         self.models = defaultdict()
         self.estimators = defaultdict(list)
         self.ptb = PreTrainingBias()
+        self.pttb = PostTrainingBias()
         self.dropper = False
         np.random.seed(42)
 
@@ -70,7 +72,7 @@ class BaseDataset:
             max_depth=self.max_depth,
         )
 
-        self.models["XGBoost"] = XGBClassifier(n_estimators=self.n_estimators,
+        self.models["XGBClassifier"] = XGBClassifier(n_estimators=self.n_estimators,
                                                learning_rate=self.learn_rate,
                                                max_depth=self.max_depth)
 
@@ -142,7 +144,7 @@ class BaseDataset:
         model_f1_score = f1_score(self.y_test, model_predicted) * 100
         return model_acc_score, model_f1_score
 
-    def evaluate_metrics(
+    def evaluate_pre_training_metrics(
         self,
         protected_attribute=None,
         privileged_group=None,
@@ -320,3 +322,38 @@ class BaseDataset:
 
         fig.savefig(
             f"results/{type(self).__name__}/{variation_name}/dist-{protected_attr}-{predicted_attr}")
+
+    def evaluate_post_training_metrics(
+        self,
+        protected_attribute: str = None,
+        privileged_group: str = None,
+    ):
+        protected_attribute = (
+            self.protected_attr[0] if protected_attribute is None else protected_attribute
+        )
+        privileged_group = (
+            self.protected_attr_mappings[protected_attribute][0]
+            if privileged_group is None
+            else privileged_group
+        )
+        dic = {}
+        for model in self.models:
+            dic[model] = {}
+            for idx in range(len(self.predicted_list[model])):
+                df = self.x_test_list[idx]
+                df[self.predicted_attr] = self.y_test_list[idx]
+                df['y_hat'] = self.predicted_list[model][idx]
+                intermed_dic = self.pttb.global_evaluation(
+                    df,
+                    self.predicted_attr,
+                    'y_hat',
+                    protected_attribute,
+                    privileged_group,
+                )
+                for key in intermed_dic:
+                    if key not in dic[model]:
+                        dic[model][key] = [intermed_dic[key]]
+                    else:
+                        dic[model][key].append(intermed_dic[key])
+
+        return dic

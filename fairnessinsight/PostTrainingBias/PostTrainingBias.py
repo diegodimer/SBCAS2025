@@ -6,20 +6,20 @@ from functional import seq
 
 class PostTrainingBias:
    
-    def _DPPL(df: pd.DataFrame, y_hat:str, protected_attr:str, privileged_group: str) -> float:
+    def _DPPL(self, df: pd.DataFrame, y_hat:str, protected_attr:str, privileged_group: str) -> float:
         q_p = len(df[(df[y_hat] == 1) & (df[protected_attr] == privileged_group)]) / len(df[df[protected_attr] == privileged_group])
         q_d = len(df[(df[y_hat] == 1) & (df[protected_attr] != privileged_group)]) / len(df[df[protected_attr] != privileged_group])
 
         return q_p - q_d
    
-    def _DI(df: pd.DataFrame, y_hat:str, protected_attr:str, privileged_group: str) -> float:
+    def _DI(self,df: pd.DataFrame, y_hat:str, protected_attr:str, privileged_group: str) -> float:
         q_p = len(df[(df[y_hat] == 1) & (df[protected_attr] == privileged_group)]) / len(df[df[protected_attr] == privileged_group])
         q_d = len(df[(df[y_hat] == 1) & (df[protected_attr] != privileged_group)]) / len(df[df[protected_attr] != privileged_group])
 
         return q_d / q_p
    
 
-    def _DCA_DCR(df: pd.DataFrame, y: str, y_hat: str, protected_attr: str, p: int) -> float:
+    def _DCA_DCR(self, df: pd.DataFrame, y: str, y_hat: str, protected_attr: str, p: int) -> float:
        n_p_1 = len(df[(df[y] == 1) & (df[protected_attr] == p)])
        n_p_0 = len(df[(df[y] == 0) & (df[protected_attr] == p)])
        n_d_1 = len(df[(df[y] == 1) & (df[protected_attr] != p)])
