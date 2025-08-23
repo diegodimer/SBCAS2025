@@ -13,34 +13,11 @@
         "unemployed": 10,
         "unknown": 11
     },
-    "marital": {
-        "divorced": 0,
-        "married": 1,
-        "single": 2
-    },
-    "education": {
-        "primary": 0,
-        "secondary": 1,
-        "tertiary": 2,
-        "unknown": 3
-    },
-    "default": {
-        "no": 0,
-        "yes": 1
-    },
-    "housing": {
-        "no": 0,
-        "yes": 1
-    },
-    "loan": {
-        "no": 0,
-        "yes": 1
-    },
-    "contact": {
-        "cellular": 0,
-        "telephone": 1,
-        "unknown": 2
-    },
+    "education": "one_hot_encoded_to_['education_primary', 'education_secondary', 'education_tertiary', 'education_unknown']",
+    "default": "one_hot_encoded_to_['default_no', 'default_yes']",
+    "housing": "one_hot_encoded_to_['housing_no', 'housing_yes']",
+    "loan": "one_hot_encoded_to_['loan_no', 'loan_yes']",
+    "contact": "one_hot_encoded_to_['contact_cellular', 'contact_telephone', 'contact_unknown']",
     "month": {
         "apr": 0,
         "aug": 1,
@@ -55,14 +32,5 @@
         "oct": 10,
         "sep": 11
     },
-    "poutcome": {
-        "failure": 0,
-        "other": 1,
-        "success": 2,
-        "unknown": 3
-    },
-    "y": {
-        "no": 0,
-        "yes": 1
-    }
+    "poutcome": "one_hot_encoded_to_['poutcome_failure', 'poutcome_other', 'poutcome_success', 'poutcome_unknown']"
 }

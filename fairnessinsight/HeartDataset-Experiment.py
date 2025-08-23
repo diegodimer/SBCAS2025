@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from tabulate import tabulate
+
 from Datasets.HeartDataset import HeartDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_charts, get_full_sets_graphs)
-from tabulate import tabulate
 
 
 def gen_graph_for_sets(h: HeartDataset, name: str):

@@ -22274,10 +22274,7 @@
         "2014-12-30": 702,
         "2014-12-31": 703
     },
-    "sex": {
-        "Female": 0,
-        "Male": 1
-    },
+    "sex": "one_hot_encoded_to_['sex_Female', 'sex_Male']",
     "dob": {
         "1919-10-14": 0,
         "1929-09-14": 1,
@@ -30080,19 +30077,7 @@
         "1998-01-20": 7798,
         "1998-03-29": 7799
     },
-    "age_cat": {
-        "25 - 45": 0,
-        "Greater than 45": 1,
-        "Less than 25": 2
-    },
-    "race": {
-        "African-American": 0,
-        "Asian": 1,
-        "Caucasian": 2,
-        "Hispanic": 3,
-        "Native American": 4,
-        "Other": 5
-    },
+    "age_cat": "one_hot_encoded_to_['age_cat_25 - 45', 'age_cat_Greater than 45', 'age_cat_Less than 25']",
     "c_jail_in": {
         "0": 0,
         "2013-01-01 01:31:55": 1,
@@ -64055,11 +64040,7 @@
         "2014-12-29": 801,
         "2014-12-31": 802
     },
-    "c_charge_degree": {
-        "F": 0,
-        "M": 1,
-        "O": 2
-    },
+    "c_charge_degree": "one_hot_encoded_to_['c_charge_degree_F', 'c_charge_degree_M', 'c_charge_degree_O']",
     "c_charge_desc": {
         "0": 0,
         "Abuse Without Great Harm": 1,
@@ -68300,11 +68281,7 @@
         "16014602TC30A": 3702,
         "16018211TC30A": 3703
     },
-    "r_charge_degree": {
-        "F": 0,
-        "M": 1,
-        "O": 2
-    },
+    "r_charge_degree": "one_hot_encoded_to_['r_charge_degree_F', 'r_charge_degree_M', 'r_charge_degree_O']",
     "r_offense_date": {
         "0": 0,
         "2013-01-03": 1,
@@ -72581,18 +72558,7 @@
         "16002969CF10A": 881,
         "16003005CF10A": 882
     },
-    "vr_charge_degree": {
-        "0": 0,
-        "(F1)": 1,
-        "(F2)": 2,
-        "(F3)": 3,
-        "(F5)": 4,
-        "(F6)": 5,
-        "(F7)": 6,
-        "(M1)": 7,
-        "(M2)": 8,
-        "(MO3)": 9
-    },
+    "vr_charge_degree": "one_hot_encoded_to_['vr_charge_degree_0', 'vr_charge_degree_(F1)', 'vr_charge_degree_(F2)', 'vr_charge_degree_(F3)', 'vr_charge_degree_(F5)', 'vr_charge_degree_(F6)', 'vr_charge_degree_(F7)', 'vr_charge_degree_(M1)', 'vr_charge_degree_(M2)', 'vr_charge_degree_(MO3)']",
     "vr_offense_date": {
         "0": 0,
         "2013-01-28": 1,
@@ -73286,15 +73252,8 @@
         "Throw In Occupied Dwell": 87,
         "Vehicular Homicide": 88
     },
-    "v_type_of_assessment": {
-        "Risk of Violence": 0
-    },
-    "v_score_text": {
-        "0": 0,
-        "High": 1,
-        "Low": 2,
-        "Medium": 3
-    },
+    "v_type_of_assessment": "one_hot_encoded_to_['v_type_of_assessment_Risk of Violence']",
+    "v_score_text": "one_hot_encoded_to_['v_score_text_0', 'v_score_text_High', 'v_score_text_Low', 'v_score_text_Medium']",
     "v_screening_date": {
         "2013-01-01": 0,
         "2013-01-02": 1,
@@ -74001,15 +73960,8 @@
         "2014-12-30": 702,
         "2014-12-31": 703
     },
-    "type_of_assessment": {
-        "Risk of Recidivism": 0
-    },
-    "score_text": {
-        "0": 0,
-        "High": 1,
-        "Low": 2,
-        "Medium": 3
-    },
+    "type_of_assessment": "one_hot_encoded_to_['type_of_assessment_Risk of Recidivism']",
+    "score_text": "one_hot_encoded_to_['score_text_0', 'score_text_High', 'score_text_Low', 'score_text_Medium']",
     "screening_date": {
         "2013-01-01": 0,
         "2013-01-02": 1,

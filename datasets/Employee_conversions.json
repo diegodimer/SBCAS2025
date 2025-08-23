@@ -1,16 +1,5 @@
 {
-    "Education": {
-        "Bachelors": 0,
-        "Masters": 1,
-        "PHD": 2
-    },
-    "City": {
-        "Bangalore": 0,
-        "New Delhi": 1,
-        "Pune": 2
-    },
-    "EverBenched": {
-        "No": 0,
-        "Yes": 1
-    }
+    "Education": "one_hot_encoded_to_['Education_Bachelors', 'Education_Masters', 'Education_PHD']",
+    "City": "one_hot_encoded_to_['City_Bangalore', 'City_New Delhi', 'City_Pune']",
+    "EverBenched": "one_hot_encoded_to_['EverBenched_No', 'EverBenched_Yes']"
 }

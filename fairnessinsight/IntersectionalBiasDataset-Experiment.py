@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from tabulate import tabulate
+
 from Datasets.IntersectionalBiasDataset import IntersectionalBiasDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_charts, get_full_sets_graphs,
                               remove_instances)
-from tabulate import tabulate
 
 
 def gen_graph_for_sets(h: IntersectionalBiasDataset, name: str):

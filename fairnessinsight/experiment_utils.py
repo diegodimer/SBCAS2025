@@ -136,18 +136,21 @@ def generate_charts(h, name, full_dataset_test):
                 d[attr][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
 
                         )
                         & (
-                            full_dataset_test[model].isin(full_dataset_test[h.predicted_attr])
+                            full_dataset_test[model].isin(
+                                full_dataset_test[h.predicted_attr])
                         )
                     ]
                 )
                 d[attr][model][f"{val} false positive"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 0)
                         & (full_dataset_test[model] == 1)
@@ -156,7 +159,8 @@ def generate_charts(h, name, full_dataset_test):
                 d[attr][model][f"{val} false negative"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 1)
                         & (full_dataset_test[model] == 0)
@@ -165,7 +169,8 @@ def generate_charts(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (
                             full_dataset_test[h.predicted_attr]
@@ -176,7 +181,8 @@ def generate_charts(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} false negative"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 1)
                         & (full_dataset_test[model] == 0)
@@ -185,7 +191,8 @@ def generate_charts(h, name, full_dataset_test):
                 d_wrongs[attr][val][model][f"{val} false positive"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (full_dataset_test[h.predicted_attr] == 0)
                         & (full_dataset_test[model] == 1)
@@ -194,7 +201,8 @@ def generate_charts(h, name, full_dataset_test):
                 d_correct[attr][model][f"{val} predicted correctly"] = len(
                     full_dataset_test.loc[
                         (
-                            full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                            full_dataset_test[attr].isin(
+                                h.protected_attr_mappings[attr][val])
                         )
                         & (
                             full_dataset_test[model]
@@ -208,7 +216,8 @@ def generate_charts(h, name, full_dataset_test):
                         len(
                             full_dataset_test.loc[
                                 (
-                                    full_dataset_test[attr].isin(h.protected_attr_mappings[attr][val])
+                                    full_dataset_test[attr].isin(
+                                        h.protected_attr_mappings[attr][val])
                                 )
                             ]
                         )
@@ -220,7 +229,7 @@ def generate_charts(h, name, full_dataset_test):
                                                  (d[attr][model][f"{val} predicted correctly"] +
                                                   d[attr][model][f"{val} false positive"] +
                                                     d[attr][model][f"{val} false negative"])),
-                                                    f"{val} predicted wrongly": 100 *
+                                                f"{val} predicted wrongly": 100 *
                                                 ((d[attr][model][f'{val} false positive'] +
                                                   d[attr][model][f'{val} false negative']) /
                                                     (d[attr][model][f"{val} predicted correctly"] +
@@ -401,7 +410,8 @@ def get_full_sets_graphs(h, name, stratify_age=False):
             (
                 len(
                     full_dataset_test.loc[
-                        (full_dataset_test[p] == full_dataset_test[h.predicted_attr])
+                        (full_dataset_test[p] ==
+                         full_dataset_test[h.predicted_attr])
                     ]
                 )
                 / total_size
@@ -412,7 +422,8 @@ def get_full_sets_graphs(h, name, stratify_age=False):
             (
                 len(
                     full_dataset_test.loc[
-                        (full_dataset_test[p] != full_dataset_test[h.predicted_attr])
+                        (full_dataset_test[p] !=
+                         full_dataset_test[h.predicted_attr])
                     ]
                 )
                 / total_size

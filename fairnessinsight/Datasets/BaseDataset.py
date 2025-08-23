@@ -1,4 +1,3 @@
-import itertools
 from collections import defaultdict
 from pathlib import Path
 
@@ -8,14 +7,13 @@ import numpy as np
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from ydata_profiling import ProfileReport
+from xgboost import XGBClassifier
 
+from fairnessinsight.PostTrainingBias.PostTrainingBias import PostTrainingBias
 from fairnessinsight.PreTrainingBias.PreTrainingBias import PreTrainingBias
-from fairnessinsight.PostTrainingBias.PostTrainingBias import PostTrainingBias 
 
 
 class BaseDataset:
@@ -73,8 +71,8 @@ class BaseDataset:
         )
 
         self.models["XGBClassifier"] = XGBClassifier(n_estimators=self.n_estimators,
-                                               learning_rate=self.learn_rate,
-                                               max_depth=self.max_depth)
+                                                     learning_rate=self.learn_rate,
+                                                     max_depth=self.max_depth)
 
     def execute_models(self):
         self._init_models(self.random_state)
@@ -207,7 +205,8 @@ class BaseDataset:
                     bar_ind.append(
                         len(
                             dataset[
-                                (dataset[predicted_attr] == i) & (dataset[attr].isin(j))
+                                (dataset[predicted_attr] == i) & (
+                                    dataset[attr].isin(j))
                             ]
                         )
                     )
@@ -355,5 +354,8 @@ class BaseDataset:
                         dic[model][key] = [intermed_dic[key]]
                     else:
                         dic[model][key].append(intermed_dic[key])
-
+        for model in dic:
+            for key in dic[model]:
+                dic[model][key] = round(
+                    sum(dic[model][key]) / len(dic[model][key]), 3)
         return dic

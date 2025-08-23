@@ -1,15 +1,5 @@
 {
-    "workclass": {
-        " ?": 0,
-        " Federal-gov": 1,
-        " Local-gov": 2,
-        " Never-worked": 3,
-        " Private": 4,
-        " Self-emp-inc": 5,
-        " Self-emp-not-inc": 6,
-        " State-gov": 7,
-        " Without-pay": 8
-    },
+    "workclass": "one_hot_encoded_to_['workclass_ ?', 'workclass_ Federal-gov', 'workclass_ Local-gov', 'workclass_ Never-worked', 'workclass_ Private', 'workclass_ Self-emp-inc', 'workclass_ Self-emp-not-inc', 'workclass_ State-gov', 'workclass_ Without-pay']",
     "education": {
         " 10th": 0,
         " 11th": 1,
@@ -28,15 +18,7 @@
         " Prof-school": 14,
         " Some-college": 15
     },
-    "marital-status": {
-        " Divorced": 0,
-        " Married-AF-spouse": 1,
-        " Married-civ-spouse": 2,
-        " Married-spouse-absent": 3,
-        " Never-married": 4,
-        " Separated": 5,
-        " Widowed": 6
-    },
+    "marital-status": "one_hot_encoded_to_['marital-status_ Divorced', 'marital-status_ Married-AF-spouse', 'marital-status_ Married-civ-spouse', 'marital-status_ Married-spouse-absent', 'marital-status_ Never-married', 'marital-status_ Separated', 'marital-status_ Widowed']",
     "occupation": {
         " ?": 0,
         " Adm-clerical": 1,
@@ -54,21 +36,8 @@
         " Tech-support": 13,
         " Transport-moving": 14
     },
-    "relationship": {
-        " Husband": 0,
-        " Not-in-family": 1,
-        " Other-relative": 2,
-        " Own-child": 3,
-        " Unmarried": 4,
-        " Wife": 5
-    },
-    "race": {
-        " Amer-Indian-Eskimo": 0,
-        " Asian-Pac-Islander": 1,
-        " Black": 2,
-        " Other": 3,
-        " White": 4
-    },
+    "relationship": "one_hot_encoded_to_['relationship_ Husband', 'relationship_ Not-in-family', 'relationship_ Other-relative', 'relationship_ Own-child', 'relationship_ Unmarried', 'relationship_ Wife']",
+    "race": "one_hot_encoded_to_['race_ Amer-Indian-Eskimo', 'race_ Asian-Pac-Islander', 'race_ Black', 'race_ Other', 'race_ White']",
     "native-country": {
         " ?": 0,
         " Cambodia": 1,
@@ -112,9 +81,5 @@
         " United-States": 39,
         " Vietnam": 40,
         " Yugoslavia": 41
-    },
-    "income": {
-        " <=50K": 0,
-        " >50K": 1
     }
 }

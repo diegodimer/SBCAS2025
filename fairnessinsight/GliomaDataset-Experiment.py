@@ -1,12 +1,11 @@
-from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from tabulate import tabulate
+
 from Datasets.GliomaDataset import GliomaDataset
 from experiment_utils import (evaluate_train_and_test_sets, feature_importante,
                               generate_charts, get_full_sets_graphs)
-from tabulate import tabulate
 
 
 def remove_instances_2(x, conditions: list, percentage: float):
