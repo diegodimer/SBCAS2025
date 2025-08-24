@@ -1,36 +1,10 @@
 {
-    "job": {
-        "admin.": 0,
-        "blue-collar": 1,
-        "entrepreneur": 2,
-        "housemaid": 3,
-        "management": 4,
-        "retired": 5,
-        "self-employed": 6,
-        "services": 7,
-        "student": 8,
-        "technician": 9,
-        "unemployed": 10,
-        "unknown": 11
-    },
+    "job": "one_hot_encoded_to_['job_admin.', 'job_blue-collar', 'job_entrepreneur', 'job_housemaid', 'job_management', 'job_retired', 'job_self-employed', 'job_services', 'job_student', 'job_technician', 'job_unemployed', 'job_unknown']",
     "education": "one_hot_encoded_to_['education_primary', 'education_secondary', 'education_tertiary', 'education_unknown']",
     "default": "one_hot_encoded_to_['default_no', 'default_yes']",
     "housing": "one_hot_encoded_to_['housing_no', 'housing_yes']",
     "loan": "one_hot_encoded_to_['loan_no', 'loan_yes']",
     "contact": "one_hot_encoded_to_['contact_cellular', 'contact_telephone', 'contact_unknown']",
-    "month": {
-        "apr": 0,
-        "aug": 1,
-        "dec": 2,
-        "feb": 3,
-        "jan": 4,
-        "jul": 5,
-        "jun": 6,
-        "mar": 7,
-        "may": 8,
-        "nov": 9,
-        "oct": 10,
-        "sep": 11
-    },
+    "month": "one_hot_encoded_to_['month_apr', 'month_aug', 'month_dec', 'month_feb', 'month_jan', 'month_jul', 'month_jun', 'month_mar', 'month_may', 'month_nov', 'month_oct', 'month_sep']",
     "poutcome": "one_hot_encoded_to_['poutcome_failure', 'poutcome_other', 'poutcome_success', 'poutcome_unknown']"
 }

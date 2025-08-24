@@ -1,0 +1,5 @@
+{
+    "Race": "one_hot_encoded_to_['Race_Asian', 'Race_Black', 'Race_Hispanic', 'Race_White']",
+    "Housing": "one_hot_encoded_to_['Housing_Stable', 'Housing_Unstable']",
+    "Delay": "one_hot_encoded_to_['Delay_No', 'Delay_Yes']"
+}
