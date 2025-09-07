@@ -1,0 +1,18 @@
+{
+    "Class Imbalance (Sex)": {
+        "max_value": -0.10236363636363636,
+        "max_percentage": 0.0
+    },
+    "KL Divergence (Sex)": {
+        "max_value": 2.2795494490132673,
+        "max_percentage": 95.0
+    },
+    "KS (Sex)": {
+        "max_value": 0.8613880454491809,
+        "max_percentage": 95.0
+    },
+    "Demographic Disparity (Sex)": {
+        "max_value": 0.8586454432961466,
+        "max_percentage": 95.0
+    }
+}

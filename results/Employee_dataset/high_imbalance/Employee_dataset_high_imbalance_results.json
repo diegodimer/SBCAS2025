@@ -1,0 +1,182 @@
+[
+    {
+        "percentage_removed": 0.0,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.10636758321273516,
+            "KL Divergence (Gender)": 0.07190355165958617,
+            "KS (Gender)": 0.18715945168046655,
+            "Demographic Disparity (Gender)": 0.19381317562824651
+        }
+    },
+    {
+        "percentage_removed": 0.05,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.1121771217712177,
+            "KL Divergence (Gender)": 0.09087159992579599,
+            "KS (Gender)": 0.2104570469424757,
+            "Demographic Disparity (Gender)": 0.21771248453641195
+        }
+    },
+    {
+        "percentage_removed": 0.1,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.11939736346516007,
+            "KL Divergence (Gender)": 0.11344616098308155,
+            "KS (Gender)": 0.2351948669475124,
+            "Demographic Disparity (Gender)": 0.24283931171803025
+        }
+    },
+    {
+        "percentage_removed": 0.15,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.12461538461538461,
+            "KL Divergence (Gender)": 0.13998861062537296,
+            "KS (Gender)": 0.2611572850826684,
+            "Demographic Disparity (Gender)": 0.26951559988810037
+        }
+    },
+    {
+        "percentage_removed": 0.2,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.12770137524557956,
+            "KL Divergence (Gender)": 0.1709977647734787,
+            "KS (Gender)": 0.2883447907838152,
+            "Demographic Disparity (Gender)": 0.29791255592873817
+        }
+    },
+    {
+        "percentage_removed": 0.25,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.14411882778000804,
+            "KL Divergence (Gender)": 0.20576299790650512,
+            "KS (Gender)": 0.3163358678121195,
+            "Demographic Disparity (Gender)": 0.32405009683806196
+        }
+    },
+    {
+        "percentage_removed": 0.3,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.14367816091954022,
+            "KL Divergence (Gender)": 0.24729726436934749,
+            "KS (Gender)": 0.34604470097370843,
+            "Demographic Disparity (Gender)": 0.35587442524179486
+        }
+    },
+    {
+        "percentage_removed": 0.35,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.1507769844603108,
+            "KL Divergence (Gender)": 0.2953091499603189,
+            "KS (Gender)": 0.37739247835849454,
+            "Demographic Disparity (Gender)": 0.3875097486262962
+        }
+    },
+    {
+        "percentage_removed": 0.4,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.15391229578675839,
+            "KL Divergence (Gender)": 0.3507785132252704,
+            "KS (Gender)": 0.41012382925617635,
+            "Demographic Disparity (Gender)": 0.42181591603870944
+        }
+    },
+    {
+        "percentage_removed": 0.45,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.15933098591549297,
+            "KL Divergence (Gender)": 0.4139063234086504,
+            "KS (Gender)": 0.44399495919251675,
+            "Demographic Disparity (Gender)": 0.45664390103492036
+        }
+    },
+    {
+        "percentage_removed": 0.5,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.17185385656292287,
+            "KL Divergence (Gender)": 0.49005552480077674,
+            "KS (Gender)": 0.48100851836757286,
+            "Demographic Disparity (Gender)": 0.4919238230496508
+        }
+    },
+    {
+        "percentage_removed": 0.55,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.1702127659574468,
+            "KL Divergence (Gender)": 0.5755284592856171,
+            "KS (Gender)": 0.5184959967568663,
+            "Demographic Disparity (Gender)": 0.5336359150739403
+        }
+    },
+    {
+        "percentage_removed": 0.6,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.17133364973896537,
+            "KL Divergence (Gender)": 0.6758615640560928,
+            "KS (Gender)": 0.5582651524856074,
+            "Demographic Disparity (Gender)": 0.5771668384513657
+        }
+    },
+    {
+        "percentage_removed": 0.65,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.1826595226497808,
+            "KL Divergence (Gender)": 0.7963979792358877,
+            "KS (Gender)": 0.6008516061130278,
+            "Demographic Disparity (Gender)": 0.6185266413324709
+        }
+    },
+    {
+        "percentage_removed": 0.7,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.2012012012012012,
+            "KL Divergence (Gender)": 0.9529794551965451,
+            "KS (Gender)": 0.6485902255639098,
+            "Demographic Disparity (Gender)": 0.6604522964139766
+        }
+    },
+    {
+        "percentage_removed": 0.75,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.21564590838908904,
+            "KL Divergence (Gender)": 1.147401745368565,
+            "KS (Gender)": 0.6990850318138683,
+            "Demographic Disparity (Gender)": 0.706703960818674
+        }
+    },
+    {
+        "percentage_removed": 0.8,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.21398305084745764,
+            "KL Divergence (Gender)": 1.3554944232327244,
+            "KS (Gender)": 0.7480866296928729,
+            "Demographic Disparity (Gender)": 0.7627224930007255
+        }
+    },
+    {
+        "percentage_removed": 0.85,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.2420937840785169,
+            "KL Divergence (Gender)": 1.7368509281178572,
+            "KS (Gender)": 0.809704334863979,
+            "Demographic Disparity (Gender)": 0.8083533435570442
+        }
+    },
+    {
+        "percentage_removed": 0.9,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.2478920741989882,
+            "KL Divergence (Gender)": 2.181717794790013,
+            "KS (Gender)": 0.868238193350301,
+            "Demographic Disparity (Gender)": 0.868238193350301
+        }
+    },
+    {
+        "percentage_removed": 0.95,
+        "metrics": {
+            "Class Imbalance (Gender)": 0.2517401392111369,
+            "KL Divergence (Gender)": 2.8622020024701826,
+            "KS (Gender)": 0.9296951670725837,
+            "Demographic Disparity (Gender)": 0.9338373254357252
+        }
+    }
+]

@@ -1,0 +1,182 @@
+[
+    {
+        "percentage_removed": 0.0,
+        "metrics": {
+            "Class Imbalance (marital)": 0.20386631571962577,
+            "KL Divergence (marital)": 0.0070658118822133215,
+            "KS (marital)": 0.03956658602029975,
+            "Demographic Disparity (marital)": -0.09177728770004895
+        }
+    },
+    {
+        "percentage_removed": 0.05,
+        "metrics": {
+            "Class Imbalance (marital)": 0.18539966257808582,
+            "KL Divergence (marital)": 0.0037184609242133723,
+            "KS (marital)": 0.028479074546277294,
+            "Demographic Disparity (marital)": -0.06626556784828747
+        }
+    },
+    {
+        "percentage_removed": 0.1,
+        "metrics": {
+            "Class Imbalance (marital)": 0.16442416258938652,
+            "KL Divergence (marital)": 0.0015123255230839842,
+            "KS (marital)": 0.018075972728008358,
+            "Demographic Disparity (marital)": -0.041981346534761654
+        }
+    },
+    {
+        "percentage_removed": 0.15,
+        "metrics": {
+            "Class Imbalance (marital)": 0.14617496295216578,
+            "KL Divergence (marital)": 5.1438668613795844e-05,
+            "KS (marital)": 0.0032837887383934533,
+            "Demographic Disparity (marital)": -0.007708742131551538
+        }
+    },
+    {
+        "percentage_removed": 0.2,
+        "metrics": {
+            "Class Imbalance (marital)": 0.12124180544043403,
+            "KL Divergence (marital)": 0.00026112166793967884,
+            "KS (marital)": 0.0073854810741501575,
+            "Demographic Disparity (marital)": 0.017204418283554956
+        }
+    },
+    {
+        "percentage_removed": 0.25,
+        "metrics": {
+            "Class Imbalance (marital)": 0.09944622104360035,
+            "KL Divergence (marital)": 0.0026362772925558157,
+            "KS (marital)": 0.023131470236771645,
+            "Demographic Disparity (marital)": 0.05426674157654071
+        }
+    },
+    {
+        "percentage_removed": 0.3,
+        "metrics": {
+            "Class Imbalance (marital)": 0.07172495554238292,
+            "KL Divergence (marital)": 0.006490961968315015,
+            "KS (marital)": 0.03618045216687271,
+            "Demographic Disparity (marital)": 0.08416644978423388
+        }
+    },
+    {
+        "percentage_removed": 0.35,
+        "metrics": {
+            "Class Imbalance (marital)": 0.04328374902136226,
+            "KL Divergence (marital)": 0.013337420960532038,
+            "KS (marital)": 0.05151982451510752,
+            "Demographic Disparity (marital)": 0.11915383589755485
+        }
+    },
+    {
+        "percentage_removed": 0.4,
+        "metrics": {
+            "Class Imbalance (marital)": 0.014064043703144069,
+            "KL Divergence (marital)": 0.02469169306209741,
+            "KS (marital)": 0.06935348465403546,
+            "Demographic Disparity (marital)": 0.15991931006995586
+        }
+    },
+    {
+        "percentage_removed": 0.45,
+        "metrics": {
+            "Class Imbalance (marital)": -0.019204597005897474,
+            "KL Divergence (marital)": 0.03985765399501455,
+            "KS (marital)": 0.08758986943803182,
+            "Demographic Disparity (marital)": 0.1997640365576807
+        }
+    },
+    {
+        "percentage_removed": 0.5,
+        "metrics": {
+            "Class Imbalance (marital)": -0.05470597509065111,
+            "KL Divergence (marital)": 0.06189388172793438,
+            "KS (marital)": 0.10833328846036872,
+            "Demographic Disparity (marital)": 0.24410655573082213
+        }
+    },
+    {
+        "percentage_removed": 0.55,
+        "metrics": {
+            "Class Imbalance (marital)": -0.0952741643339371,
+            "KL Divergence (marital)": 0.08995147896209953,
+            "KS (marital)": 0.13044938316565152,
+            "Demographic Disparity (marital)": 0.2873720026644826
+        }
+    },
+    {
+        "percentage_removed": 0.6,
+        "metrics": {
+            "Class Imbalance (marital)": -0.13620071684587814,
+            "KL Divergence (marital)": 0.13468275181969588,
+            "KS (marital)": 0.15789836693144416,
+            "Demographic Disparity (marital)": 0.34224671962717235
+        }
+    },
+    {
+        "percentage_removed": 0.65,
+        "metrics": {
+            "Class Imbalance (marital)": -0.1807995373382491,
+            "KL Divergence (marital)": 0.19949365084079818,
+            "KS (marital)": 0.18979248316697794,
+            "Demographic Disparity (marital)": 0.4030100365909731
+        }
+    },
+    {
+        "percentage_removed": 0.7,
+        "metrics": {
+            "Class Imbalance (marital)": -0.23445812433500532,
+            "KL Divergence (marital)": 0.27943010680409874,
+            "KS (marital)": 0.2254827391636205,
+            "Demographic Disparity (marital)": 0.45811675738864494
+        }
+    },
+    {
+        "percentage_removed": 0.75,
+        "metrics": {
+            "Class Imbalance (marital)": -0.28729923499018706,
+            "KL Divergence (marital)": 0.4222423504173214,
+            "KS (marital)": 0.2718826934454669,
+            "Demographic Disparity (marital)": 0.5351666618251746
+        }
+    },
+    {
+        "percentage_removed": 0.8,
+        "metrics": {
+            "Class Imbalance (marital)": -0.35266968708980817,
+            "KL Divergence (marital)": 0.6084505343377903,
+            "KS (marital)": 0.32848451614270724,
+            "Demographic Disparity (marital)": 0.6035757648540361
+        }
+    },
+    {
+        "percentage_removed": 0.85,
+        "metrics": {
+            "Class Imbalance (marital)": -0.42506848699869765,
+            "KL Divergence (marital)": 0.9120905909573548,
+            "KS (marital)": 0.4050012728653717,
+            "Demographic Disparity (marital)": 0.6815874405526166
+        }
+    },
+    {
+        "percentage_removed": 0.9,
+        "metrics": {
+            "Class Imbalance (marital)": -0.5021512572903719,
+            "KL Divergence (marital)": 1.511091188762902,
+            "KS (marital)": 0.5133103297281607,
+            "Demographic Disparity (marital)": 0.7805473715046699
+        }
+    },
+    {
+        "percentage_removed": 0.95,
+        "metrics": {
+            "Class Imbalance (marital)": -0.5950531479967294,
+            "KL Divergence (marital)": 2.651059750485615,
+            "KS (marital)": 0.6861927384871129,
+            "Demographic Disparity (marital)": 0.8782501056724473
+        }
+    }
+]

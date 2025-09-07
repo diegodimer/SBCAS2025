@@ -1,0 +1,182 @@
+[
+    {
+        "percentage_removed": 0.0,
+        "metrics": {
+            "Class Imbalance (homo)": 0.32211313697989713,
+            "KL Divergence (homo)": 0.006907629804163672,
+            "KS (homo)": 0.04922011412963956,
+            "Demographic Disparity (homo)": -0.05985684086654697
+        }
+    },
+    {
+        "percentage_removed": 0.05,
+        "metrics": {
+            "Class Imbalance (homo)": 0.33938814531548755,
+            "KL Divergence (homo)": 0.002870269948752606,
+            "KS (homo)": 0.031972200960446895,
+            "Demographic Disparity (homo)": -0.038465362284259896
+        }
+    },
+    {
+        "percentage_removed": 0.1,
+        "metrics": {
+            "Class Imbalance (homo)": 0.3545232273838631,
+            "KL Divergence (homo)": 0.00046472944680964016,
+            "KS (homo)": 0.012947161142107033,
+            "Demographic Disparity (homo)": -0.015489296876226966
+        }
+    },
+    {
+        "percentage_removed": 0.15,
+        "metrics": {
+            "Class Imbalance (homo)": 0.3633633633633634,
+            "KL Divergence (homo)": 0.0002019245678713203,
+            "KS (homo)": 0.008554290305599427,
+            "Demographic Disparity (homo)": 0.010333272440004981
+        }
+    },
+    {
+        "percentage_removed": 0.2,
+        "metrics": {
+            "Class Imbalance (homo)": 0.37467965146078935,
+            "KL Divergence (homo)": 0.0026041653933238165,
+            "KS (homo)": 0.03083458637424974,
+            "Demographic Disparity (homo)": 0.03745930757532556
+        }
+    },
+    {
+        "percentage_removed": 0.25,
+        "metrics": {
+            "Class Imbalance (homo)": 0.38235294117647056,
+            "KL Divergence (homo)": 0.008279018317659391,
+            "KS (homo)": 0.05503690838037345,
+            "Demographic Disparity (homo)": 0.06798166851035098
+        }
+    },
+    {
+        "percentage_removed": 0.3,
+        "metrics": {
+            "Class Imbalance (homo)": 0.4076467420570813,
+            "KL Divergence (homo)": 0.01641199345203319,
+            "KS (homo)": 0.0784878625582528,
+            "Demographic Disparity (homo)": 0.09444394227002922
+        }
+    },
+    {
+        "percentage_removed": 0.35,
+        "metrics": {
+            "Class Imbalance (homo)": 0.41878453038674035,
+            "KL Divergence (homo)": 0.02948109482159819,
+            "KS (homo)": 0.10551626926311553,
+            "Demographic Disparity (homo)": 0.12844317798817295
+        }
+    },
+    {
+        "percentage_removed": 0.4,
+        "metrics": {
+            "Class Imbalance (homo)": 0.4293817356778219,
+            "KL Divergence (homo)": 0.04756541993565107,
+            "KS (homo)": 0.13433368045694094,
+            "Demographic Disparity (homo)": 0.16617740059180375
+        }
+    },
+    {
+        "percentage_removed": 0.45,
+        "metrics": {
+            "Class Imbalance (homo)": 0.46386946386946387,
+            "KL Divergence (homo)": 0.06940222864899413,
+            "KS (homo)": 0.16541124342287458,
+            "Demographic Disparity (homo)": 0.1945844251830948
+        }
+    },
+    {
+        "percentage_removed": 0.5,
+        "metrics": {
+            "Class Imbalance (homo)": 0.4703415218693829,
+            "KL Divergence (homo)": 0.1003276251411076,
+            "KS (homo)": 0.19863958372515833,
+            "Demographic Disparity (homo)": 0.24160443158626568
+        }
+    },
+    {
+        "percentage_removed": 0.55,
+        "metrics": {
+            "Class Imbalance (homo)": 0.49445129469790383,
+            "KL Divergence (homo)": 0.1387024810173232,
+            "KS (homo)": 0.23620703533768012,
+            "Demographic Disparity (homo)": 0.2823866794015258
+        }
+    },
+    {
+        "percentage_removed": 0.6,
+        "metrics": {
+            "Class Imbalance (homo)": 0.5098412698412699,
+            "KL Divergence (homo)": 0.18792329885978307,
+            "KS (homo)": 0.2761039232689987,
+            "Demographic Disparity (homo)": 0.33471831878790437
+        }
+    },
+    {
+        "percentage_removed": 0.65,
+        "metrics": {
+            "Class Imbalance (homo)": 0.5392670157068062,
+            "KL Divergence (homo)": 0.2517331223044928,
+            "KS (homo)": 0.32411487322201615,
+            "Demographic Disparity (homo)": 0.3807966849731079
+        }
+    },
+    {
+        "percentage_removed": 0.7,
+        "metrics": {
+            "Class Imbalance (homo)": 0.5476029709655638,
+            "KL Divergence (homo)": 0.32911717561045994,
+            "KS (homo)": 0.3694563830064338,
+            "Demographic Disparity (homo)": 0.4565346139485779
+        }
+    },
+    {
+        "percentage_removed": 0.75,
+        "metrics": {
+            "Class Imbalance (homo)": 0.5774058577405857,
+            "KL Divergence (homo)": 0.4348362296021333,
+            "KS (homo)": 0.4297957647223608,
+            "Demographic Disparity (homo)": 0.517439082656474
+        }
+    },
+    {
+        "percentage_removed": 0.8,
+        "metrics": {
+            "Class Imbalance (homo)": 0.6222062004325883,
+            "KL Divergence (homo)": 0.5989715775855275,
+            "KS (homo)": 0.5137472434266328,
+            "Demographic Disparity (homo)": 0.5651104642483953
+        }
+    },
+    {
+        "percentage_removed": 0.85,
+        "metrics": {
+            "Class Imbalance (homo)": 0.6343283582089553,
+            "KL Divergence (homo)": 0.773955004041621,
+            "KS (homo)": 0.5797409374708788,
+            "Demographic Disparity (homo)": 0.6765821573369991
+        }
+    },
+    {
+        "percentage_removed": 0.9,
+        "metrics": {
+            "Class Imbalance (homo)": 0.6736272235112142,
+            "KL Divergence (homo)": 1.1132045112788356,
+            "KS (homo)": 0.6918467643735053,
+            "Demographic Disparity (homo)": 0.7569875776397516
+        }
+    },
+    {
+        "percentage_removed": 0.95,
+        "metrics": {
+            "Class Imbalance (homo)": 0.7062600321027287,
+            "KL Divergence (homo)": 1.7002302084075462,
+            "KS (homo)": 0.8200730996406705,
+            "Demographic Disparity (homo)": 0.8721189591078067
+        }
+    }
+]

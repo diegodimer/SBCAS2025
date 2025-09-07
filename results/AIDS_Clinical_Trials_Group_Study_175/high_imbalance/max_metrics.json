@@ -1,0 +1,18 @@
+{
+    "Class Imbalance (homo)": {
+        "max_value": 0.7062600321027287,
+        "max_percentage": 95.0
+    },
+    "KL Divergence (homo)": {
+        "max_value": 1.7002302084075462,
+        "max_percentage": 95.0
+    },
+    "KS (homo)": {
+        "max_value": 0.8200730996406705,
+        "max_percentage": 95.0
+    },
+    "Demographic Disparity (homo)": {
+        "max_value": 0.8721189591078067,
+        "max_percentage": 95.0
+    }
+}

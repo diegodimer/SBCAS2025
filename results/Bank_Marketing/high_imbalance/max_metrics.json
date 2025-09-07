@@ -1,0 +1,18 @@
+{
+    "Class Imbalance (marital)": {
+        "max_value": 0.20386631571962577,
+        "max_percentage": 0.0
+    },
+    "KL Divergence (marital)": {
+        "max_value": 2.651059750485615,
+        "max_percentage": 95.0
+    },
+    "KS (marital)": {
+        "max_value": 0.6861927384871129,
+        "max_percentage": 95.0
+    },
+    "Demographic Disparity (marital)": {
+        "max_value": 0.8782501056724473,
+        "max_percentage": 95.0
+    }
+}

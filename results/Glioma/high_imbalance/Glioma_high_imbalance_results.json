@@ -1,0 +1,182 @@
+[
+    {
+        "percentage_removed": 0.0,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8233890214797136,
+            "KL Divergence (Race)": 0.07424716361098996,
+            "KS (Race)": 0.19145323333805014,
+            "Demographic Disparity (Race)": -0.06327160493827155
+        }
+    },
+    {
+        "percentage_removed": 0.05,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8253382533825339,
+            "KL Divergence (Race)": 0.05324611344736899,
+            "KS (Race)": 0.16237044910975285,
+            "Demographic Disparity (Race)": -0.05282333761486013
+        }
+    },
+    {
+        "percentage_removed": 0.1,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8274111675126904,
+            "KL Divergence (Race)": 0.03459208456907818,
+            "KS (Race)": 0.13104575163398696,
+            "Demographic Disparity (Race)": -0.04195328642795493
+        }
+    },
+    {
+        "percentage_removed": 0.15,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8269986893840104,
+            "KL Divergence (Race)": 0.021549316289894482,
+            "KS (Race)": 0.10356071475153256,
+            "Demographic Disparity (Race)": -0.03305211744463554
+        }
+    },
+    {
+        "percentage_removed": 0.2,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8238482384823849,
+            "KL Divergence (Race)": 0.013091761140541253,
+            "KS (Race)": 0.08080923534118184,
+            "Demographic Disparity (Race)": -0.02609144923792306
+        }
+    },
+    {
+        "percentage_removed": 0.25,
+        "metrics": {
+            "Class Imbalance (Race)": -0.820476858345021,
+            "KL Divergence (Race)": 0.006429513769529223,
+            "KS (Race)": 0.056673728813559365,
+            "Demographic Disparity (Race)": -0.018552670985640285
+        }
+    },
+    {
+        "percentage_removed": 0.3,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8197674418604651,
+            "KL Divergence (Race)": 0.0011633376823653764,
+            "KS (Race)": 0.024116252705348895,
+            "Demographic Disparity (Race)": -0.00791075050709944
+        }
+    },
+    {
+        "percentage_removed": 0.35,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8250377073906485,
+            "KL Divergence (Race)": 0.0013869931297549112,
+            "KS (Race)": 0.026332288401253956,
+            "Demographic Disparity (Race)": 0.00840978593272168
+        }
+    },
+    {
+        "percentage_removed": 0.4,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8087774294670846,
+            "KL Divergence (Race)": 0.00131414214902131,
+            "KS (Race)": 0.025598772622666743,
+            "Demographic Disparity (Race)": 0.008889020431921635
+        }
+    },
+    {
+        "percentage_removed": 0.45,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8270799347471451,
+            "KL Divergence (Race)": 0.027024507582737056,
+            "KS (Race)": 0.11603773584905663,
+            "Demographic Disparity (Race)": 0.03689657388956746
+        }
+    },
+    {
+        "percentage_removed": 0.5,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8129251700680272,
+            "KL Divergence (Race)": 0.030684792226059313,
+            "KS (Race)": 0.12331570868156233,
+            "Demographic Disparity (Race)": 0.04257198374845439
+        }
+    },
+    {
+        "percentage_removed": 0.55,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8259325044404974,
+            "KL Divergence (Race)": 0.0906495206882463,
+            "KS (Race)": 0.21146668784245215,
+            "Demographic Disparity (Race)": 0.06901466853262839
+        }
+    },
+    {
+        "percentage_removed": 0.6,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8141263940520446,
+            "KL Divergence (Race)": 0.10948971512033465,
+            "KS (Race)": 0.23114754098360657,
+            "Demographic Disparity (Race)": 0.08188153310104529
+        }
+    },
+    {
+        "percentage_removed": 0.65,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8245614035087719,
+            "KL Divergence (Race)": 0.2184716564757578,
+            "KS (Race)": 0.3247863247863248,
+            "Demographic Disparity (Race)": 0.11145510835913319
+        }
+    },
+    {
+        "percentage_removed": 0.7,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8401639344262295,
+            "KL Divergence (Race)": 0.43774964899167,
+            "KS (Race)": 0.45519958882987843,
+            "Demographic Disparity (Race)": 0.147047429298799
+        }
+    },
+    {
+        "percentage_removed": 0.75,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8444924406047516,
+            "KL Divergence (Race)": 0.6686032629404498,
+            "KS (Race)": 0.5546448087431695,
+            "Demographic Disparity (Race)": 0.1822340016244176
+        }
+    },
+    {
+        "percentage_removed": 0.8,
+        "metrics": {
+            "Class Imbalance (Race)": -0.821917808219178,
+            "KL Divergence (Race)": 0.6565346272633701,
+            "KS (Race)": 0.5411605937921729,
+            "Demographic Disparity (Race)": 0.21954271710509154
+        }
+    },
+    {
+        "percentage_removed": 0.85,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8159806295399515,
+            "KL Divergence (Race)": 0.886441890922598,
+            "KS (Race)": 0.6108070175438597,
+            "Demographic Disparity (Race)": 0.2839618948192614
+        }
+    },
+    {
+        "percentage_removed": 0.9,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8350515463917526,
+            "KL Divergence (Race)": 1.6537568879835751,
+            "KS (Race)": 0.8026685393258427,
+            "Demographic Disparity (Race)": 0.37816377171215876
+        }
+    },
+    {
+        "percentage_removed": 0.95,
+        "metrics": {
+            "Class Imbalance (Race)": -0.8292011019283747,
+            "KL Divergence (Race)": 2.4022512081878817,
+            "KS (Race)": 0.895452778857365,
+            "Demographic Disparity (Race)": 0.5523193096008631
+        }
+    }
+]
