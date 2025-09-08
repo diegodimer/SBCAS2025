@@ -18,3 +18,21 @@ To build the PDF from the article, you need `pdflatex` and `bibtex`. The script 
 ## Usage
 To run the experiments, run the files with the suffix `-Experiment` in the `code` folder.
 
+## Citation
+```bibtex
+@inproceedings{sbcas,
+ author = {Diego Rodrigues and Mariana Recamonde-Mendoza},
+ title = { Bias Propagation in Health AI: Measuring Pre-Training Bias and Its Effect on Machine Learning Model Outcomes},
+ booktitle = {Anais do XXV Simpósio Brasileiro de Computação Aplicada à Saúde},
+ location = {Porto Alegre/RS},
+ year = {2025},
+ keywords = {},
+ issn = {2763-8952},
+ pages = {341--352},
+ publisher = {SBC},
+ address = {Porto Alegre, RS, Brasil},
+ doi = {10.5753/sbcas.2025.7143},
+ url = {https://sol.sbc.org.br/index.php/sbcas/article/view/35508}
+}
+
+```
